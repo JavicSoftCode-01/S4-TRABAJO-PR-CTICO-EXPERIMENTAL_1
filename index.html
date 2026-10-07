@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de Acceso SPA interactivo con formularios dinámicos y validación nativa client-side">
+  <meta name="author" content="Práctica Desarrollo Web Front-End">
+  <title>Portal de Acceso - SPA Front-End</title>
+
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6.5.1 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Estilos Modulares: Tokens globales y Reglas de Layout -->
+  <link rel="stylesheet" href="root.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <!-- Enlace de Salto Accesible (A11y Skip Link) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- Contenedor Principal SPA -->
+  <main id="main-content" class="spa-wrapper" role="main">
+    <section class="spa-card">
+      <!-- Encabezado de la Tarjeta con Identidad Visual -->
+      <header class="spa-header">
+        <div class="brand-badge" aria-hidden="true">
+          <i class="fa-solid fa-shield-halved" id="brand-icon"></i>
+        </div>
+        <h1 class="spa-title" id="spa-title">Iniciar Sesión</h1>
+        <p class="spa-subtitle" id="spa-subtitle">Ingresa tus credenciales para acceder a la plataforma</p>
+      </header>
+
+      <!-- Área de Vistas Dinámicas SPA -->
+      <div class="views-viewport">
+        <!-- ================================================================
+             1. Vista: Inicio de Sesión
+             ================================================================ -->
+        <section id="view-login" class="form-view active" aria-labelledby="spa-title">
+          <form id="form-login" novalidate>
+            <div class="form-grid">
+              <!-- Campo: Correo Electrónico -->
+              <div class="form-group" id="group-login-email">
+                <label for="login-email" class="form-label">
+                  <span>Correo Electrónico</span>
+                  <span class="required-badge" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-envelope input-icon-left" aria-hidden="true"></i>
+                  <input
+                    type="email"
+                    id="login-email"
+                    name="email"
+                    class="form-input"
+                    placeholder="ejemplo@dominio.com"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="error-login-email"
+                  >
+                </div>
+                <div id="error-login-email" class="field-error-msg" role="alert">
+                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                  <span class="error-text"></span>
+                </div>
+              </div>
+
+              <!-- Campo: Contraseña -->
+              <div class="form-group" id="group-login-password">
+                <label for="login-password" class="form-label">
+                  <span>Contraseña</span>
+                  <span class="required-badge" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-lock input-icon-left" aria-hidden="true"></i>
+                  <input
+                    type="password"
+                    id="login-password"
+                    name="password"
+                    class="form-input"
+                    placeholder="Tu contraseña de acceso"
+                    autocomplete="current-password"
+                    required
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="error-login-password"
+                  >
+                  <button
+                    type="button"
+                    class="btn-toggle-password"
+                    aria-label="Mostrar u ocultar contraseña"
+                    data-target="login-password"
+                  >
+                    <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div id="error-login-password" class="field-error-msg" role="alert">
+                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                  <span class="error-text"></span>
+                </div>
+              </div>
+
+              <!-- Acciones y Enlaces de Navegación -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="btn-submit-login">
+                  <span>Iniciar Sesión</span>
+                  <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn-link"
+                  id="link-go-recovery"
+                  data-navigate="view-recovery"
+                >
+                  ¿Olvidaste tu contraseña?
+                </button>
+              </div>
+            </div>
+
+            <footer class="form-footer-nav">
+              <span>¿No tienes una cuenta registrada?</span>
+              <button
+                type="button"
+                class="btn-link"
+                id="link-go-register"
+                data-navigate="view-register"
+              >
+                Crear una cuenta nueva
+              </button>
+            </footer>
+          </form>
+        </section>
+
+        <!-- ================================================================
+             2. Vista: Registro de Usuario (Mínimo 5 campos)
+             ================================================================ -->
+        <section id="view-register" class="form-view" aria-labelledby="spa-title">
+          <form id="form-register" novalidate>
+            <div class="form-grid">
+              <!-- Campo 1: Nombres y Apellidos Completos -->
+              <div class="form-group" id="group-register-name">
+                <label for="register-name" class="form-label">
+                  <span>Nombres Completos</span>
+                  <span class="required-badge" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-user input-icon-left" aria-hidden="true"></i>
+                  <input
+                    type="text"
+                    id="register-name"
+                    name="fullname"
+                    class="form-input"
+                    placeholder="Ej. Juan Pérez"
+                    autocomplete="name"
+                    required
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="error-register-name"
+                  >
+                </div>
+                <div id="error-register-name" class="field-error-msg" role="alert">
+                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                  <span class="error-text"></span>
+                </div>
+              </div>
+
+              <!-- Campo 2: Correo Electrónico -->
+              <div class="form-group" id="group-register-email">
+                <label for="register-email" class="form-label">
+                  <span>Correo Electrónico</span>
+                  <span class="required-badge" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-envelope input-icon-left" aria-hidden="true"></i>
+                  <input
+                    type="email"
+                    id="register-email"
+                    name="email"
+                    class="form-input"
+                    placeholder="juan.perez@dominio.com"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="error-register-email"
+                  >
+                </div>
+                <div id="error-register-email" class="field-error-msg" role="alert">
+                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                  <span class="error-text"></span>
+                </div>
+              </div>
+
+              <!-- Fila de 2 Columnas: Edad y Teléfono -->
+              <div class="form-row-2col">
+                <!-- Campo 3: Edad -->
+                <div class="form-group" id="group-register-age">
+                  <label for="register-age" class="form-label">
+                    <span>Edad</span>
+                    <span class="required-badge" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <i class="fa-solid fa-calendar input-icon-left" aria-hidden="true"></i>
+                    <input
+                      type="number"
+                      id="register-age"
+                      name="age"
+                      class="form-input"
+                      placeholder="18"
+                      min="14"
+                      max="120"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="error-register-age"
+                    >
+                  </div>
+                  <div id="error-register-age" class="field-error-msg" role="alert">
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                    <span class="error-text"></span>
+                  </div>
+                </div>
+
+                <!-- Campo 4: Teléfono -->
+                <div class="form-group" id="group-register-phone">
+                  <label for="register-phone" class="form-label">
+                    <span>Teléfono</span>
+                    <span class="required-badge" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <i class="fa-solid fa-phone input-icon-left" aria-hidden="true"></i>
+                    <input
+                      type="tel"
+                      id="register-phone"
+                      name="phone"
+                      class="form-input"
+                      placeholder="0991234567"
+                      autocomplete="tel"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="error-register-phone"
+                    >
+                  </div>
+                  <div id="error-register-phone" class="field-error-msg" role="alert">
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                    <span class="error-text"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campo 5: Contraseña de Registro -->
+              <div class="form-group" id="group-register-password">
+                <label for="register-password" class="form-label">
+                  <span>Contraseña</span>
+                  <span class="required-badge" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-lock input-icon-left" aria-hidden="true"></i>
+                  <input
+                    type="password"
+                    id="register-password"
+                    name="password"
+                    class="form-input"
+                    placeholder="Mínimo 8 caracteres (letras y números)"
+                    autocomplete="new-password"
+                    required
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="error-register-password"
+                  >
+                  <button
+                    type="button"
+                    class="btn-toggle-password"
+                    aria-label="Mostrar u ocultar contraseña"
+                    data-target="register-password"
+                  >
+                    <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div id="error-register-password" class="field-error-msg" role="alert">
+                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                  <span class="error-text"></span>
+                </div>
+              </div>
+
+              <!-- Acciones y Enlaces de Registro -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="btn-submit-register">
+                  <span>Registrar Cuenta</span>
+                  <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <footer class="form-footer-nav">
+              <span>¿Ya posees una cuenta registrada?</span>
+              <button
+                type="button"
+                class="btn-link"
+                id="link-go-login-from-reg"
+                data-navigate="view-login"
+              >
+                Iniciar Sesión
+              </button>
+            </footer>
+          </form>
+        </section>
+
+        <!-- ================================================================
+             3. Vista: Recuperación de Contraseña
+             ================================================================ -->
+        <section id="view-recovery" class="form-view" aria-labelledby="spa-title">
+          <form id="form-recovery" novalidate>
+            <div class="form-grid">
+              <!-- Campo: Correo Electrónico para Recuperación -->
+              <div class="form-group" id="group-recovery-email">
+                <label for="recovery-email" class="form-label">
+                  <span>Correo de Recuperación</span>
+                  <span class="required-badge" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-envelope input-icon-left" aria-hidden="true"></i>
+                  <input
+                    type="email"
+                    id="recovery-email"
+                    name="email"
+                    class="form-input"
+                    placeholder="tu-correo@dominio.com"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-invalid="false"
+                    aria-describedby="error-recovery-email"
+                  >
+                </div>
+                <div id="error-recovery-email" class="field-error-msg" role="alert">
+                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                  <span class="error-text"></span>
+                </div>
+              </div>
+
+              <!-- Acciones y Enlaces de Recuperación -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="btn-submit-recovery">
+                  <span>Enviar Instrucciones</span>
+                  <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <footer class="form-footer-nav">
+              <span>¿Recordaste tu contraseña?</span>
+              <button
+                type="button"
+                class="btn-link"
+                id="link-go-login-from-rec"
+                data-navigate="view-login"
+              >
+                Volver a Iniciar Sesión
+              </button>
+            </footer>
+          </form>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- Región Accesible para Notificaciones Flotantes (Toasts) -->
+  <aside
+    id="toast-container"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+    aria-label="Notificaciones del sistema"
+  ></aside>
+
+  <!-- Lógica de Negocio y Control Front-End -->
+  <script src="script.js"></script>
+</body>
+</html>
