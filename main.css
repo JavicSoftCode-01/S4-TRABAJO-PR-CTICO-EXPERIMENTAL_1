@@ -77,7 +77,7 @@ body::before {
    ========================================================================== */
 .auth-layout-container {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1100px;
   position: relative;
   z-index: var(--z-card);
 }
@@ -92,6 +92,7 @@ body::before {
   overflow: hidden;
   position: relative;
   align-items: stretch;
+  transition: all var(--duration-normal) var(--ease-in-out-smooth);
 }
 
 /* ==========================================================================
@@ -100,20 +101,22 @@ body::before {
 .auth-hero-panel {
   background: linear-gradient(165deg, var(--surface-panel) 0%, #080f1e 100%);
   border-right: 1px solid var(--border-subtle);
-  padding: var(--space-xl) var(--space-lg);
+  padding: var(--space-xl) var(--space-xl);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: var(--space-md);
   position: relative;
   overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-in-out-smooth);
 }
 
 .ambient-glow {
   position: absolute;
   top: -100px;
   left: -80px;
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
@@ -126,6 +129,7 @@ body::before {
   gap: var(--space-sm);
   position: relative;
   z-index: 2;
+  transition: transform var(--duration-normal) var(--ease-in-out-smooth);
 }
 
 .brand-logo {
@@ -135,8 +139,8 @@ body::before {
 }
 
 .logo-icon-box {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--color-primary) 0%, #38bdf8 100%);
   color: #ffffff;
@@ -176,7 +180,7 @@ body::before {
   color: var(--color-success-text);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  padding: 3px var(--space-sm);
+  padding: 4px var(--space-sm);
   border-radius: var(--radius-full);
   align-self: flex-start;
 }
@@ -196,9 +200,12 @@ body::before {
 }
 
 .hero-body {
-  margin: var(--space-md) 0;
+  margin: var(--space-sm) 0;
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .hero-headline {
@@ -208,57 +215,67 @@ body::before {
   color: var(--text-primary);
   line-height: var(--line-height-snug);
   letter-spacing: -0.03em;
-  margin-bottom: var(--space-2xs);
+  margin-bottom: 2px;
 }
 
 .hero-description {
   font-size: var(--font-size-xs);
   color: var(--text-muted);
-  line-height: var(--line-height-normal);
-  margin-bottom: var(--space-sm);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-xs);
 }
 
-/* Gráfico Ornamental SVG Compacto */
+/* Gráfico Ornamental SVG Sustancial y Bien Dimensionado */
 .hero-visual-graphic {
   width: 100%;
   margin: var(--space-2xs) 0 var(--space-sm) 0;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 8px;
 }
 
 .network-svg {
   width: 100%;
-  max-height: 100px;
+  max-height: 130px;
   display: block;
 }
 
+/* Lista de Features con Iconos Notorios y Visibles */
 .hero-feature-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
 }
 
 .feature-item {
   display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
+  align-items: center;
+  gap: var(--space-md);
 }
 
 .feature-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-sm);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
   background: var(--surface-card-subtle);
   border: 1px solid var(--border-subtle);
   color: var(--color-accent-cyan);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-xs);
+  font-size: 1.15rem; /* Icono grande, visible y proporcionado */
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: all var(--duration-fast) var(--ease-out-expo);
+}
+
+.feature-item:hover .feature-icon {
+  border-color: var(--color-accent-cyan);
+  color: #ffffff;
+  transform: scale(1.05);
 }
 
 .feature-text {
@@ -267,20 +284,21 @@ body::before {
 }
 
 .feature-text strong {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   color: var(--text-primary);
   font-weight: var(--font-weight-semibold);
 }
 
 .feature-text span {
-  font-size: var(--font-size-2xs);
+  font-size: var(--font-size-xs);
   color: var(--text-muted);
 }
 
 .hero-footer {
   position: relative;
   z-index: 2;
-  padding-top: var(--space-sm);
+  margin-top: auto; /* Anclado al fondo de forma natural y fija */
+  padding-top: var(--space-md);
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -332,7 +350,7 @@ body::before {
   font-family: var(--font-sans);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  padding: 0.55rem var(--space-sm);
+  padding: 0.58rem var(--space-sm);
   border-radius: var(--radius-sm);
   cursor: pointer;
   display: inline-flex;
@@ -357,28 +375,38 @@ body::before {
   outline-offset: 1px;
 }
 
-/* Encabezado del Formulario */
+/* Encabezado del Formulario: Icono a la Izquierda y Texto a la Derecha */
 .panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
   margin-bottom: var(--space-md);
 }
 
-.header-badge {
+.panel-header-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
   background: var(--color-primary-subtle);
   color: var(--color-primary);
-  font-size: var(--font-size-sm);
-  margin-bottom: var(--space-xs);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  font-size: var(--font-size-lg);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+.panel-header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .panel-title {
   font-family: var(--font-display);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
   letter-spacing: -0.02em;
@@ -392,19 +420,19 @@ body::before {
 }
 
 /* ==========================================================================
-   5. Transiciones y Vistas SPA Dinámicas (Sin espacio muerto forzado)
+   5. Transiciones y Vistas SPA Dinámicas (Sin Saltos Bruscos)
    ========================================================================== */
 .views-viewport {
   position: relative;
-  /* Altura natural y flexible sin huecos vacíos */
+  transition: opacity var(--duration-normal) var(--ease-in-out-smooth);
 }
 
 .form-view {
   display: none;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity var(--duration-normal) var(--ease-out-expo),
-              transform var(--duration-normal) var(--ease-out-expo);
+  transform: translateY(6px);
+  transition: opacity var(--duration-normal) var(--ease-in-out-smooth),
+              transform var(--duration-normal) var(--ease-in-out-smooth);
 }
 
 .form-view.active {
@@ -812,7 +840,7 @@ body::before {
   text-decoration: underline;
 }
 
-/* Footer de Navegación Compacto (Sin espacios vacíos) */
+/* Footer de Navegación Compacto */
 .form-footer-nav {
   display: flex;
   flex-direction: column;
@@ -1052,6 +1080,16 @@ body::before {
 
   .auth-form-panel {
     padding: var(--space-md);
+  }
+
+  .panel-header {
+    gap: var(--space-sm);
+  }
+
+  .panel-header-badge {
+    width: 38px;
+    height: 38px;
+    font-size: var(--font-size-md);
   }
 
   .form-row-2col {

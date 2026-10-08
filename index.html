@@ -55,12 +55,12 @@
             Infraestructura de Identidad & Control Criptográfico.
           </h2>
           <p class="hero-description">
-            Arquitectura de validación perimetral con interfaz optimizada de alta densidad y cumplimiento estricto WCAG 2.2 AA.
+            Arquitectura de validación perimetral con interfaz de alta densidad y cumplimiento estricto WCAG 2.2 AA.
           </p>
 
-          <!-- Gráfico SVG Ornamental Compacto: Red de Nodos de Seguridad -->
+          <!-- Gráfico SVG Ornamental Proporcionado: Red de Nodos de Seguridad -->
           <div class="hero-visual-graphic" aria-hidden="true">
-            <svg viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="network-svg">
+            <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" class="network-svg">
               <defs>
                 <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
@@ -71,40 +71,46 @@
                   <stop offset="100%" stop-color="#2563eb"/>
                 </radialGradient>
               </defs>
-              <line x1="50" y1="65" x2="140" y2="25" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
-              <line x1="140" y1="25" x2="260" y2="25" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="260" y1="25" x2="350" y2="65" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
-              <line x1="140" y1="25" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="260" y1="25" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="50" y1="65" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="350" y1="65" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="45" y1="75" x2="135" y2="30" stroke="url(#lineGrad)" stroke-width="1.8" stroke-dasharray="4 4" />
+              <line x1="135" y1="30" x2="265" y2="30" stroke="url(#lineGrad)" stroke-width="1.8" />
+              <line x1="265" y1="30" x2="355" y2="75" stroke="url(#lineGrad)" stroke-width="1.8" stroke-dasharray="4 4" />
+              <line x1="135" y1="30" x2="200" y2="115" stroke="url(#lineGrad)" stroke-width="1.8" />
+              <line x1="265" y1="30" x2="200" y2="115" stroke="url(#lineGrad)" stroke-width="1.8" />
+              <line x1="45" y1="75" x2="200" y2="115" stroke="url(#lineGrad)" stroke-width="1.8" />
+              <line x1="355" y1="75" x2="200" y2="115" stroke="url(#lineGrad)" stroke-width="1.8" />
 
-              <circle cx="50" cy="65" r="4" fill="#64748b" />
-              <circle cx="140" cy="25" r="6" fill="url(#nodeGrad)" />
-              <circle cx="260" cy="25" r="6" fill="url(#nodeGrad)" />
-              <circle cx="350" cy="65" r="4" fill="#64748b" />
-              <circle cx="200" cy="95" r="7" fill="#38bdf8" />
+              <circle cx="45" cy="75" r="5" fill="#64748b" />
+              <circle cx="135" cy="30" r="7.5" fill="url(#nodeGrad)" />
+              <circle cx="265" cy="30" r="7.5" fill="url(#nodeGrad)" />
+              <circle cx="355" cy="75" r="5" fill="#64748b" />
+              <circle cx="200" cy="115" r="8.5" fill="#38bdf8" />
             </svg>
           </div>
 
-          <!-- Píldoras de Atributos de Calidad -->
+          <!-- Píldoras de Atributos de Calidad con Iconos Enriquecidos -->
           <ul class="hero-feature-list" role="list">
             <li class="feature-item">
-              <span class="feature-icon"><i class="fa-solid fa-shield-virus" aria-hidden="true"></i></span>
+              <span class="feature-icon" aria-hidden="true">
+                <i class="fa-solid fa-shield-halved"></i>
+              </span>
               <div class="feature-text">
                 <strong>Mitigación Defensiva XSS</strong>
                 <span>Sanitización proactiva de secuencias HTML en entradas</span>
               </div>
             </li>
             <li class="feature-item">
-              <span class="feature-icon"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></span>
+              <span class="feature-icon" aria-hidden="true">
+                <i class="fa-solid fa-universal-access"></i>
+              </span>
               <div class="feature-text">
                 <strong>Accesibilidad WCAG 2.2 AA</strong>
                 <span>Navegación 100% por teclado, regiones ARIA y motion-safe</span>
               </div>
             </li>
             <li class="feature-item">
-              <span class="feature-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+              <span class="feature-icon" aria-hidden="true">
+                <i class="fa-solid fa-bolt-lightning"></i>
+              </span>
               <div class="feature-text">
                 <strong>Arquitectura SPA sin Recarga</strong>
                 <span>Control de ciclo de vida en el DOM con 0 ms de latencia HTTP</span>
@@ -157,13 +163,15 @@
           </div>
         </nav>
 
-        <!-- Cabecera de la Vista Activa -->
+        <!-- Cabecera de la Vista Activa: Icono a la Izquierda y Título a la Derecha -->
         <header class="panel-header">
-          <div class="header-badge" aria-hidden="true">
+          <div class="panel-header-badge" aria-hidden="true">
             <i class="fa-solid fa-shield-halved" id="brand-icon"></i>
           </div>
-          <h1 class="panel-title" id="spa-title">Iniciar Sesión</h1>
-          <p class="panel-subtitle" id="spa-subtitle">Ingresa tus credenciales corporativas para acceder</p>
+          <div class="panel-header-text">
+            <h1 class="panel-title" id="spa-title">Iniciar Sesión</h1>
+            <p class="panel-subtitle" id="spa-subtitle">Ingresa tus credenciales corporativas para acceder</p>
+          </div>
         </header>
 
         <!-- Contenedor Viewport de Vistas Dinámicas -->
@@ -271,7 +279,7 @@
                   </button>
                 </div>
 
-                <!-- Micro-Badge de Seguridad Corporativa (Equilibra la densidad de la vista) -->
+                <!-- Micro-Badge de Seguridad Corporativa -->
                 <div class="auth-security-badge-compact" aria-hidden="true">
                   <div class="badge-icon-pill">
                     <i class="fa-solid fa-shield-halved"></i>
