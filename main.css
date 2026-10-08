@@ -77,7 +77,7 @@ body::before {
    ========================================================================== */
 .auth-layout-container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1120px;
   position: relative;
   z-index: var(--z-card);
 }
@@ -92,7 +92,13 @@ body::before {
   overflow: hidden;
   position: relative;
   align-items: stretch;
-  transition: all var(--duration-normal) var(--ease-in-out-smooth);
+  transition: all 350ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (min-width: 1025px) {
+  .auth-card-split {
+    min-height: 670px; /* Altura constante para que ambas vistas estén perfectamente estabilizadas sin saltos */
+  }
 }
 
 /* ==========================================================================
@@ -105,10 +111,10 @@ body::before {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   position: relative;
   overflow: hidden;
-  transition: all var(--duration-normal) var(--ease-in-out-smooth);
+  transition: all 350ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .ambient-glow {
@@ -129,7 +135,6 @@ body::before {
   gap: var(--space-sm);
   position: relative;
   z-index: 2;
-  transition: transform var(--duration-normal) var(--ease-in-out-smooth);
 }
 
 .brand-logo {
@@ -139,8 +144,8 @@ body::before {
 }
 
 .logo-icon-box {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--color-primary) 0%, #38bdf8 100%);
   color: #ffffff;
@@ -200,12 +205,12 @@ body::before {
 }
 
 .hero-body {
-  margin: var(--space-sm) 0;
+  margin: var(--space-2xs) 0;
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-2xs);
 }
 
 .hero-headline {
@@ -221,14 +226,14 @@ body::before {
 .hero-description {
   font-size: var(--font-size-xs);
   color: var(--text-muted);
-  line-height: var(--line-height-relaxed);
-  margin-bottom: var(--space-xs);
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--space-2xs);
 }
 
-/* Gráfico Ornamental SVG Sustancial y Bien Dimensionado */
+/* Gráfico Ornamental SVG Amplio y Sustancial */
 .hero-visual-graphic {
   width: 100%;
-  margin: var(--space-2xs) 0 var(--space-sm) 0;
+  margin: var(--space-2xs) 0 var(--space-xs) 0;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -237,17 +242,17 @@ body::before {
 
 .network-svg {
   width: 100%;
-  max-height: 130px;
+  max-height: 145px;
   display: block;
 }
 
-/* Lista de Features con Iconos Notorios y Visibles */
+/* Lista de Features con Iconos Notorios, Grandes y Claros */
 .hero-feature-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  margin-top: var(--space-xs);
+  margin-top: var(--space-2xs);
 }
 
 .feature-item {
@@ -257,8 +262,8 @@ body::before {
 }
 
 .feature-icon {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-md);
   background: var(--surface-card-subtle);
   border: 1px solid var(--border-subtle);
@@ -266,16 +271,16 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem; /* Icono grande, visible y proporcionado */
+  font-size: 1.45rem; /* Icono grande, contundente, visible sin esfuerzo */
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
 .feature-item:hover .feature-icon {
   border-color: var(--color-accent-cyan);
   color: #ffffff;
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .feature-text {
@@ -297,7 +302,7 @@ body::before {
 .hero-footer {
   position: relative;
   z-index: 2;
-  margin-top: auto; /* Anclado al fondo de forma natural y fija */
+  margin-top: auto; /* Anclado al pie de forma sólida y estable */
   padding-top: var(--space-md);
   border-top: 1px solid var(--border-subtle);
 }
@@ -375,12 +380,19 @@ body::before {
   outline-offset: 1px;
 }
 
-/* Encabezado del Formulario: Icono a la Izquierda y Texto a la Derecha */
+/* Encabezado del Formulario: Icono y Título en la Misma Fila Horizontal */
 .panel-header {
   display: flex;
-  align-items: center;
-  gap: var(--space-md);
+  flex-direction: column;
+  gap: 4px;
   margin-bottom: var(--space-md);
+}
+
+.panel-title-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 14px !important;
 }
 
 .panel-header-badge {
@@ -392,16 +404,10 @@ body::before {
   border-radius: var(--radius-md);
   background: var(--color-primary-subtle);
   color: var(--color-primary);
-  font-size: var(--font-size-lg);
+  font-size: 1.25rem;
   border: 1px solid rgba(99, 102, 241, 0.25);
   flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
-}
-
-.panel-header-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .panel-title {
@@ -410,29 +416,31 @@ body::before {
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
   letter-spacing: -0.02em;
-  line-height: var(--line-height-tight);
+  margin: 0;
+  line-height: 1.2;
 }
 
 .panel-subtitle {
   font-size: var(--font-size-xs);
   color: var(--text-muted);
-  margin-top: 2px;
+  margin: 0;
+  padding-left: 58px; /* Perfectamente alineado con el texto bajo el icono */
 }
 
 /* ==========================================================================
-   5. Transiciones y Vistas SPA Dinámicas (Sin Saltos Bruscos)
+   5. Transiciones y Vistas SPA Dinámicas (Suaves y Estables)
    ========================================================================== */
 .views-viewport {
   position: relative;
-  transition: opacity var(--duration-normal) var(--ease-in-out-smooth);
+  transition: opacity 300ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .form-view {
   display: none;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity var(--duration-normal) var(--ease-in-out-smooth),
-              transform var(--duration-normal) var(--ease-in-out-smooth);
+  transition: opacity 300ms cubic-bezier(0.25, 1, 0.5, 1),
+              transform 300ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .form-view.active {
@@ -1038,6 +1046,7 @@ body::before {
 @media (max-width: 1024px) {
   .auth-card-split {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .auth-hero-panel {
@@ -1082,14 +1091,18 @@ body::before {
     padding: var(--space-md);
   }
 
-  .panel-header {
-    gap: var(--space-sm);
+  .panel-title-row {
+    gap: var(--space-sm) !important;
   }
 
   .panel-header-badge {
     width: 38px;
     height: 38px;
     font-size: var(--font-size-md);
+  }
+
+  .panel-subtitle {
+    padding-left: 48px;
   }
 
   .form-row-2col {
@@ -1127,6 +1140,10 @@ body::before {
 
   .panel-title {
     font-size: var(--font-size-md);
+  }
+
+  .panel-subtitle {
+    padding-left: 0;
   }
 }
 
