@@ -174,6 +174,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Activar vista seleccionada
     targetView.classList.add('active');
 
+    // Sincronizar clase de modo de layout para animación fluida de ajuste en el panel izquierdo
+    const authCardSplit = document.querySelector('.auth-card-split');
+    if (authCardSplit) {
+      authCardSplit.classList.remove('mode-login', 'mode-register', 'mode-recovery');
+      if (targetViewId === 'view-login') {
+        authCardSplit.classList.add('mode-login');
+      } else if (targetViewId === 'view-register') {
+        authCardSplit.classList.add('mode-register');
+      } else if (targetViewId === 'view-recovery') {
+        authCardSplit.classList.add('mode-recovery');
+      }
+    }
+
     // Sincronizar pestañas segmentadas
     const meta = viewMetadata[targetViewId];
     if (tabLogin && tabRegister) {
