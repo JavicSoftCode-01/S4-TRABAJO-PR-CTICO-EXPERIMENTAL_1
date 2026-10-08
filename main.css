@@ -728,6 +728,31 @@ body::before {
   display: flex;
 }
 
+/* Texto de Asistencia Informativo para cada Input (Helper Hints) */
+.field-hint-text {
+  font-size: var(--font-size-2xs);
+  color: var(--text-faint);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1px;
+  line-height: 1.3;
+}
+
+.field-hint-text i {
+  font-size: 9px;
+  opacity: 0.85;
+  color: var(--color-accent-cyan);
+}
+
+.form-group:focus-within .field-hint-text {
+  color: var(--text-muted);
+}
+
+.form-group.has-error .field-hint-text {
+  display: none;
+}
+
 /* ==========================================================================
    9. Medidor de Fuerza de Contraseña
    ========================================================================== */

@@ -204,9 +204,12 @@
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-login-email"
+                      aria-describedby="hint-login-email error-login-email"
                     >
                   </div>
+                  <span class="field-hint-text" id="hint-login-email">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Formato requerido: usuario@dominio.com
+                  </span>
                   <div id="error-login-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
@@ -243,7 +246,7 @@
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-login-password"
+                      aria-describedby="hint-login-password error-login-password"
                     >
                     <button
                       type="button"
@@ -254,6 +257,9 @@
                       <i class="fa-regular fa-eye" aria-hidden="true"></i>
                     </button>
                   </div>
+                  <span class="field-hint-text" id="hint-login-password">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Clave de acceso previamente registrada
+                  </span>
                   <div id="error-login-password" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
@@ -332,9 +338,12 @@
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-register-name"
+                      aria-describedby="hint-register-name error-register-name"
                     >
                   </div>
+                  <span class="field-hint-text" id="hint-register-name">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Nombres y apellidos completos (mínimo 3 letras)
+                  </span>
                   <div id="error-register-name" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
@@ -361,9 +370,12 @@
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-register-email"
+                      aria-describedby="hint-register-email error-register-email"
                     >
                   </div>
+                  <span class="field-hint-text" id="hint-register-email">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Correo válido corporativo o personal para confirmación
+                  </span>
                   <div id="error-register-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
@@ -393,9 +405,12 @@
                         required
                         aria-required="true"
                         aria-invalid="false"
-                        aria-describedby="error-register-age"
+                        aria-describedby="hint-register-age error-register-age"
                       >
                     </div>
+                    <span class="field-hint-text" id="hint-register-age">
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Rango permitido: 14 a 120 años
+                    </span>
                     <div id="error-register-age" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                       <span class="error-text"></span>
@@ -422,9 +437,12 @@
                         required
                         aria-required="true"
                         aria-invalid="false"
-                        aria-describedby="error-register-phone"
+                        aria-describedby="hint-register-phone error-register-phone"
                       >
                     </div>
+                    <span class="field-hint-text" id="hint-register-phone">
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> 8 a 15 dígitos con prefijo opcional
+                    </span>
                     <div id="error-register-phone" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                       <span class="error-text"></span>
@@ -452,7 +470,7 @@
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-register-password"
+                      aria-describedby="hint-register-password error-register-password"
                     >
                     <button
                       type="button"
@@ -463,6 +481,9 @@
                       <i class="fa-regular fa-eye" aria-hidden="true"></i>
                     </button>
                   </div>
+                  <span class="field-hint-text" id="hint-register-password">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Mínimo 8 caracteres (al menos letras y números)
+                  </span>
 
                   <!-- Medidor de Fortaleza Dinámico (UX Premium) -->
                   <div class="password-strength-box" id="password-strength-box" aria-live="polite">
@@ -545,9 +566,12 @@
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-recovery-email"
+                      aria-describedby="hint-recovery-email error-recovery-email"
                     >
                   </div>
+                  <span class="field-hint-text" id="hint-recovery-email">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Correo vinculado donde recibirás el enlace temporal
+                  </span>
                   <div id="error-recovery-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
