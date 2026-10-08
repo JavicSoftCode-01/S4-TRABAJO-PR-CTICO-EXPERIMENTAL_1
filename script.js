@@ -1,5 +1,5 @@
 /**
- * script.js - Lógica de Negocio, Controlador SPA, Validaciones Defensivas y UX de Alta Fidelidad
+ * script.js - Lógica de Negocio, Controlador SPA, Validaciones Defensivas y UX Amigable
  * 
  * NOTA DE SEGURIDAD ARQUITECTÓNICA:
  * Todas las validaciones ejecutadas en este script son exclusivamente del lado del CLIENTE (Front-End)
@@ -108,37 +108,63 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabLogin = document.getElementById('tab-login');
   const tabRegister = document.getElementById('tab-register');
 
+  // Registro de estado de envío para evitar validaciones prematuras en blur
+  const formSubmitTracker = {
+    'form-login': false,
+    'form-register': false,
+    'form-recovery': false
+  };
+
   const viewMetadata = {
     'view-login': {
       title: 'Iniciar Sesión',
       subtitle: 'Ingresa tus credenciales corporativas para acceder',
       iconClass: 'fa-solid fa-shield-halved',
-      firstInputId: 'login-email',
+      formId: 'form-login',
       activeTab: 'tab-login'
     },
     'view-register': {
       title: 'Crear Cuenta Corporativa',
       subtitle: 'Completa los 5 campos obligatorios para registrarte',
       iconClass: 'fa-solid fa-user-plus',
-      firstInputId: 'register-name',
+      formId: 'form-register',
       activeTab: 'tab-register'
     },
     'view-recovery': {
       title: 'Recuperar Contraseña',
       subtitle: 'Ingresa tu correo institucional para recibir el token de acceso',
       iconClass: 'fa-solid fa-key',
-      firstInputId: 'recovery-email',
+      formId: 'form-recovery',
       activeTab: null
     }
   };
 
   /**
-   * Alterna de manera fluida entre las vistas de la SPA sin recargar la página.
+   * Limpia totalmente los estados de error y validación de todos los campos.
+   */
+  const clearAllValidationStates = () => {
+    document.querySelectorAll('.form-group').forEach(group => {
+      group.classList.remove('has-error', 'is-valid');
+      const input = group.querySelector('.form-input');
+      if (input) input.setAttribute('aria-invalid', 'false');
+      const errorContainer = group.querySelector('.field-error-msg');
+      if (errorContainer) errorContainer.style.display = 'none';
+      const errorText = group.querySelector('.error-text');
+      if (errorText) errorText.textContent = '';
+    });
+  };
+
+  /**
+   * Alterna de manera fluida entre las vistas de la SPA sin recargar la página
+   * y sin autofocus prematuro que atrape el cursor del usuario.
    * @param {string} targetViewId - Identificador del contenedor de vista destino
    */
   const switchView = (targetViewId) => {
     const targetView = document.getElementById(targetViewId);
     if (!targetView || !viewMetadata[targetViewId]) return;
+
+    // Limpiar estados de error al alternar entre pestañas para una experiencia impecable
+    clearAllValidationStates();
 
     // Desactivar vista actual
     views.forEach(view => {
@@ -175,12 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (brandIcon) {
       brandIcon.className = meta.iconClass;
     }
-
-    // A11y: Transferir foco al primer campo interactivo
-    setTimeout(() => {
-      const firstInput = document.getElementById(meta.firstInputId);
-      if (firstInput) firstInput.focus();
-    }, 120);
   };
 
   // Delegación de eventos para elementos con atributo data-navigate
@@ -194,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ==========================================================================
      4. Módulo de Visibilidad de Contraseñas (Toggle Password)
-     ========================================================================== */
+     ========================================================================= */
   document.querySelectorAll('.btn-toggle-password').forEach(toggleBtn => {
     toggleBtn.addEventListener('click', () => {
       const targetInputId = toggleBtn.getAttribute('data-target');
@@ -307,6 +327,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const clearFieldValidationState = (input) => {
+    const group = input.closest('.form-group');
+    if (!group) return;
+    group.classList.remove('has-error', 'is-valid');
+    input.setAttribute('aria-invalid', 'false');
+    const errorContainer = group.querySelector('.field-error-msg');
+    if (errorContainer) errorContainer.style.display = 'none';
+    const errorText = group.querySelector('.error-text');
+    if (errorText) errorText.textContent = '';
+  };
+
   const validateField = (input) => {
     const value = input.value;
     const name = input.name;
@@ -349,10 +380,26 @@ document.addEventListener('DOMContentLoaded', () => {
     return { isValid: true, error: '' };
   };
 
-  // Enlazar eventos blur e input para feedback visual en tiempo real
+  // Enlazar eventos blur e input con comportamiento UX NO intrusivo
   const inputs = document.querySelectorAll('.form-input');
   inputs.forEach(input => {
     input.addEventListener('blur', () => {
+      const form = input.closest('form');
+      const formId = form ? form.id : '';
+      const hasBeenSubmitted = formSubmitTracker[formId];
+      const trimmedVal = input.value.trim();
+
+      // REGLA CLAVE DE UX:
+      // Si el campo está vacío y el usuario NO ha intentado enviar el formulario aún,
+      // NO mostrar error ni borde rojo. Mantener el campo limpio.
+      if (trimmedVal === '') {
+        if (!hasBeenSubmitted) {
+          clearFieldValidationState(input);
+          return;
+        }
+      }
+
+      // Si el usuario escribió contenido (aunque no haya hecho submit), o si ya intentó hacer submit:
       const result = validateField(input);
       setFieldValidationState(input, result.isValid, result.error);
     });
@@ -377,6 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (formLogin) {
     formLogin.addEventListener('submit', (e) => {
       e.preventDefault();
+      formSubmitTracker['form-login'] = true;
 
       const emailInput = document.getElementById('login-email');
       const passInput = document.getElementById('login-password');
@@ -397,7 +445,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const sanitizedEmail = escapeHTML(emailInput.value.trim());
       showToast('Autenticación Exitosa', `Sesión iniciada correctamente para: ${sanitizedEmail}`, 'success');
       formLogin.reset();
-      document.querySelectorAll('#form-login .form-group').forEach(g => g.classList.remove('is-valid'));
+      formSubmitTracker['form-login'] = false;
+      clearAllValidationStates();
     });
   }
 
@@ -406,6 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (formRegister) {
     formRegister.addEventListener('submit', (e) => {
       e.preventDefault();
+      formSubmitTracker['form-register'] = true;
 
       const nameInput = document.getElementById('register-name');
       const emailInput = document.getElementById('register-email');
@@ -443,7 +493,8 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('Cuenta Creada', `Bienvenido al sistema, ${safeName}. Ya puedes iniciar sesión.`, 'success');
 
       formRegister.reset();
-      document.querySelectorAll('#form-register .form-group').forEach(g => g.classList.remove('is-valid'));
+      formSubmitTracker['form-register'] = false;
+      clearAllValidationStates();
       if (strengthProgress) {
         strengthProgress.className = 'strength-progress';
         strengthProgress.style.width = '0%';
@@ -461,6 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (formRecovery) {
     formRecovery.addEventListener('submit', (e) => {
       e.preventDefault();
+      formSubmitTracker['form-recovery'] = true;
 
       const emailInput = document.getElementById('recovery-email');
       const result = validateField(emailInput);
@@ -476,7 +528,8 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('Instrucciones Emitidas', `Se ha generado un token de recuperación para: ${safeEmail}`, 'success');
 
       formRecovery.reset();
-      document.querySelectorAll('#form-recovery .form-group').forEach(g => g.classList.remove('is-valid'));
+      formSubmitTracker['form-recovery'] = false;
+      clearAllValidationStates();
 
       setTimeout(() => {
         switchView('view-login');

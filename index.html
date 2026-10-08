@@ -52,15 +52,15 @@
 
         <div class="hero-body">
           <h2 class="hero-headline">
-            Infraestructura de Identidad & Control de Acceso Criptográfico.
+            Infraestructura de Identidad & Control Criptográfico.
           </h2>
           <p class="hero-description">
-            Arquitectura de validación perimetral con tolerancia cero a intrusiones, interfaz optimizada de alta densidad y cumplimiento estricto de estándares WCAG 2.2 AA.
+            Arquitectura de validación perimetral con interfaz optimizada de alta densidad y cumplimiento estricto WCAG 2.2 AA.
           </p>
 
-          <!-- Gráfico SVG Ornamental Moderno: Red de Nodos de Seguridad -->
+          <!-- Gráfico SVG Ornamental Compacto: Red de Nodos de Seguridad -->
           <div class="hero-visual-graphic" aria-hidden="true">
-            <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="network-svg">
+            <svg viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="network-svg">
               <defs>
                 <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
@@ -71,19 +71,19 @@
                   <stop offset="100%" stop-color="#2563eb"/>
                 </radialGradient>
               </defs>
-              <line x1="50" y1="90" x2="140" y2="40" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
-              <line x1="140" y1="40" x2="260" y2="40" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="260" y1="40" x2="350" y2="90" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
-              <line x1="140" y1="40" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="260" y1="40" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="50" y1="90" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
-              <line x1="350" y1="90" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="50" y1="65" x2="140" y2="25" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
+              <line x1="140" y1="25" x2="260" y2="25" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="260" y1="25" x2="350" y2="65" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
+              <line x1="140" y1="25" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="260" y1="25" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="50" y1="65" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="350" y1="65" x2="200" y2="95" stroke="url(#lineGrad)" stroke-width="1.5" />
 
-              <circle cx="50" cy="90" r="5" fill="#64748b" />
-              <circle cx="140" cy="40" r="7" fill="url(#nodeGrad)" />
-              <circle cx="260" cy="40" r="7" fill="url(#nodeGrad)" />
-              <circle cx="350" cy="90" r="5" fill="#64748b" />
-              <circle cx="200" cy="130" r="9" fill="#38bdf8" />
+              <circle cx="50" cy="65" r="4" fill="#64748b" />
+              <circle cx="140" cy="25" r="6" fill="url(#nodeGrad)" />
+              <circle cx="260" cy="25" r="6" fill="url(#nodeGrad)" />
+              <circle cx="350" cy="65" r="4" fill="#64748b" />
+              <circle cx="200" cy="95" r="7" fill="#38bdf8" />
             </svg>
           </div>
 
@@ -163,7 +163,7 @@
             <i class="fa-solid fa-shield-halved" id="brand-icon"></i>
           </div>
           <h1 class="panel-title" id="spa-title">Iniciar Sesión</h1>
-          <p class="panel-subtitle" id="spa-subtitle">Ingresa tus credenciales para acceder a la plataforma</p>
+          <p class="panel-subtitle" id="spa-subtitle">Ingresa tus credenciales corporativas para acceder</p>
         </header>
 
         <!-- Contenedor Viewport de Vistas Dinámicas -->
@@ -252,12 +252,34 @@
                   </div>
                 </div>
 
+                <!-- Control Adicional: Recordar Equipo -->
+                <div class="login-meta-row">
+                  <label class="remember-checkbox-label" for="login-remember">
+                    <input type="checkbox" id="login-remember" class="custom-checkbox">
+                    <span class="checkbox-custom-ui" aria-hidden="true">
+                      <i class="fa-solid fa-check"></i>
+                    </span>
+                    <span class="remember-text">Recordar este dispositivo de confianza</span>
+                  </label>
+                </div>
+
                 <!-- Botón Principal de Envío -->
                 <div class="form-actions">
                   <button type="submit" class="btn btn-primary" id="btn-submit-login">
                     <span>Acceder al Portal</span>
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                   </button>
+                </div>
+
+                <!-- Micro-Badge de Seguridad Corporativa (Equilibra la densidad de la vista) -->
+                <div class="auth-security-badge-compact" aria-hidden="true">
+                  <div class="badge-icon-pill">
+                    <i class="fa-solid fa-shield-halved"></i>
+                  </div>
+                  <div class="badge-copy">
+                    <strong>Acceso Protegido y Cifrado</strong>
+                    <span>Sesión resguardada con aislamiento estricto de credenciales.</span>
+                  </div>
                 </div>
               </div>
 
