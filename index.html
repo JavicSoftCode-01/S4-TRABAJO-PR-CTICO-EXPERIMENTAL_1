@@ -317,7 +317,12 @@
           <section id="view-register" class="form-view" role="tabpanel" aria-labelledby="tab-register">
             <form id="form-register" novalidate>
               <div class="form-grid">
-                
+
+                <!-- Sección 1: Datos Personales -->
+                <fieldset class="form-section">
+                <legend class="form-section-title"><span class="form-section-index">01</span> Identidad y contacto</legend>
+
+                <div class="form-row-2col">
                 <!-- Campo 1: Nombres y Apellidos Completos -->
                 <div class="form-group" id="group-register-name">
                   <label for="register-name" class="form-label">
@@ -342,7 +347,7 @@
                     >
                   </div>
                   <span class="field-hint-text" id="hint-register-name">
-                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Nombres y apellidos completos (mínimo 3 letras)
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Solo letras, mínimo 3 caracteres
                   </span>
                   <div id="error-register-name" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -374,12 +379,13 @@
                     >
                   </div>
                   <span class="field-hint-text" id="hint-register-email">
-                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Correo válido corporativo o personal para confirmación
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Será tu usuario de acceso
                   </span>
                   <div id="error-register-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
                   </div>
+                </div>
                 </div>
 
                 <!-- Fila Doble Columna: Edad y Teléfono -->
@@ -409,7 +415,7 @@
                       >
                     </div>
                     <span class="field-hint-text" id="hint-register-age">
-                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Rango permitido: 14 a 120 años
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Entre 14 y 120 años
                     </span>
                     <div id="error-register-age" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -441,7 +447,7 @@
                       >
                     </div>
                     <span class="field-hint-text" id="hint-register-phone">
-                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> 8 a 15 dígitos con prefijo opcional
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> 8 a 15 dígitos, prefijo opcional
                     </span>
                     <div id="error-register-phone" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -449,8 +455,13 @@
                     </div>
                   </div>
                 </div>
+                </fieldset>
 
-                <!-- Fila 2 Columnas: Contraseña y Confirmación (Alta Densidad UX sin Scroll) -->
+                <!-- Sección 2: Seguridad de la Cuenta -->
+                <fieldset class="form-section">
+                <legend class="form-section-title"><span class="form-section-index">02</span> Seguridad de la cuenta</legend>
+
+                <!-- Fila 2 Columnas: Contraseña y Confirmación -->
                 <div class="form-row-2col">
                   <!-- Campo 5: Contraseña -->
                   <div class="form-group" id="group-register-password">
@@ -484,7 +495,7 @@
                       </button>
                     </div>
                     <span class="field-hint-text" id="hint-register-password">
-                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Mínimo 8 letras y números
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Mín. 8, con letras y números
                     </span>
                     <div id="error-register-password" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -524,7 +535,7 @@
                       </button>
                     </div>
                     <span class="field-hint-text" id="hint-register-confirm-password">
-                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Debe ser idéntica a la anterior
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Debe coincidir con la contraseña
                     </span>
                     <div id="error-register-confirm-password" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -550,6 +561,7 @@
                     </span>
                   </div>
                 </div>
+                </fieldset>
 
                 <!-- Botón de Envío -->
                 <div class="form-actions">
