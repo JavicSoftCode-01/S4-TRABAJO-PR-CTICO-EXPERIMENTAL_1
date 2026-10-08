@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portal de Acceso SPA interactivo con formularios dinámicos y validación nativa client-side">
-  <meta name="author" content="Práctica Desarrollo Web Front-End">
-  <title>Portal de Acceso - SPA Front-End</title>
+  <meta name="description" content="Portal de Acceso SPA de nivel Enterprise con formularios dinámicos, validación defensiva y accesibilidad WCAG 2.2 AA">
+  <meta name="theme-color" content="#090d16">
+  <title>NexusAuth Enterprise • Portal de Acceso Seguro</title>
 
   <!-- Google Fonts: Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Font Awesome 6.5.1 CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- Estilos Modulares: Tokens globales y Reglas de Layout -->
+  <!-- Hojas de Estilo Modulares -->
   <link rel="stylesheet" href="root.css">
   <link rel="stylesheet" href="main.css">
 </head>
@@ -23,355 +23,536 @@
   <!-- Enlace de Salto Accesible (A11y Skip Link) -->
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-  <!-- Contenedor Principal SPA -->
-  <main id="main-content" class="spa-wrapper" role="main">
-    <section class="spa-card">
-      <!-- Encabezado de la Tarjeta con Identidad Visual -->
-      <header class="spa-header">
-        <div class="brand-badge" aria-hidden="true">
-          <i class="fa-solid fa-shield-halved" id="brand-icon"></i>
+  <!-- Layout Principal Split-Screen -->
+  <div class="auth-layout-container">
+    <main id="main-content" class="auth-card-split" role="main">
+      
+      <!-- ====================================================================
+           PANEL IZQUIERDO: Hero Showcase y Autoridad de Marca (Desktop Showcase)
+           ==================================================================== -->
+      <aside class="auth-hero-panel" aria-label="Información institucional y características del sistema">
+        <!-- Aura de Iluminación Ambiental -->
+        <div class="ambient-glow" aria-hidden="true"></div>
+
+        <div class="hero-header">
+          <div class="brand-logo">
+            <span class="logo-icon-box" aria-hidden="true">
+              <i class="fa-solid fa-cube"></i>
+            </span>
+            <div class="logo-text-group">
+              <span class="logo-title">NexusAuth</span>
+              <span class="logo-badge">ENTERPRISE CORE</span>
+            </div>
+          </div>
+          <span class="system-status-pill">
+            <span class="status-pulse-dot" aria-hidden="true"></span>
+            Sistemas Seguros y Activos
+          </span>
         </div>
-        <h1 class="spa-title" id="spa-title">Iniciar Sesión</h1>
-        <p class="spa-subtitle" id="spa-subtitle">Ingresa tus credenciales para acceder a la plataforma</p>
-      </header>
 
-      <!-- Área de Vistas Dinámicas SPA -->
-      <div class="views-viewport">
-        <!-- ================================================================
-             1. Vista: Inicio de Sesión
-             ================================================================ -->
-        <section id="view-login" class="form-view active" aria-labelledby="spa-title">
-          <form id="form-login" novalidate>
-            <div class="form-grid">
-              <!-- Campo: Correo Electrónico -->
-              <div class="form-group" id="group-login-email">
-                <label for="login-email" class="form-label">
-                  <span>Correo Electrónico</span>
-                  <span class="required-badge" aria-hidden="true">*</span>
-                </label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-envelope input-icon-left" aria-hidden="true"></i>
-                  <input
-                    type="email"
-                    id="login-email"
-                    name="email"
-                    class="form-input"
-                    placeholder="ejemplo@dominio.com"
-                    autocomplete="email"
-                    required
-                    aria-required="true"
-                    aria-invalid="false"
-                    aria-describedby="error-login-email"
-                  >
-                </div>
-                <div id="error-login-email" class="field-error-msg" role="alert">
-                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
-                  <span class="error-text"></span>
-                </div>
+        <div class="hero-body">
+          <h2 class="hero-headline">
+            Infraestructura de Identidad & Control de Acceso Criptográfico.
+          </h2>
+          <p class="hero-description">
+            Arquitectura de validación perimetral con tolerancia cero a intrusiones, interfaz optimizada de alta densidad y cumplimiento estricto de estándares WCAG 2.2 AA.
+          </p>
+
+          <!-- Gráfico SVG Ornamental Moderno: Red de Nodos de Seguridad -->
+          <div class="hero-visual-graphic" aria-hidden="true">
+            <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="network-svg">
+              <defs>
+                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#6366f1" stop-opacity="0.2"/>
+                </linearGradient>
+                <radialGradient id="nodeGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#38bdf8"/>
+                  <stop offset="100%" stop-color="#2563eb"/>
+                </radialGradient>
+              </defs>
+              <line x1="50" y1="90" x2="140" y2="40" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
+              <line x1="140" y1="40" x2="260" y2="40" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="260" y1="40" x2="350" y2="90" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="4 4" />
+              <line x1="140" y1="40" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="260" y1="40" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="50" y1="90" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
+              <line x1="350" y1="90" x2="200" y2="130" stroke="url(#lineGrad)" stroke-width="1.5" />
+
+              <circle cx="50" cy="90" r="5" fill="#64748b" />
+              <circle cx="140" cy="40" r="7" fill="url(#nodeGrad)" />
+              <circle cx="260" cy="40" r="7" fill="url(#nodeGrad)" />
+              <circle cx="350" cy="90" r="5" fill="#64748b" />
+              <circle cx="200" cy="130" r="9" fill="#38bdf8" />
+            </svg>
+          </div>
+
+          <!-- Píldoras de Atributos de Calidad -->
+          <ul class="hero-feature-list" role="list">
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fa-solid fa-shield-virus" aria-hidden="true"></i></span>
+              <div class="feature-text">
+                <strong>Mitigación Defensiva XSS</strong>
+                <span>Sanitización proactiva de secuencias HTML en entradas</span>
               </div>
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fa-solid fa-universal-access" aria-hidden="true"></i></span>
+              <div class="feature-text">
+                <strong>Accesibilidad WCAG 2.2 AA</strong>
+                <span>Navegación 100% por teclado, regiones ARIA y motion-safe</span>
+              </div>
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+              <div class="feature-text">
+                <strong>Arquitectura SPA sin Recarga</strong>
+                <span>Control de ciclo de vida en el DOM con 0 ms de latencia HTTP</span>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-              <!-- Campo: Contraseña -->
-              <div class="form-group" id="group-login-password">
-                <label for="login-password" class="form-label">
-                  <span>Contraseña</span>
-                  <span class="required-badge" aria-hidden="true">*</span>
-                </label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-lock input-icon-left" aria-hidden="true"></i>
-                  <input
-                    type="password"
-                    id="login-password"
-                    name="password"
-                    class="form-input"
-                    placeholder="Tu contraseña de acceso"
-                    autocomplete="current-password"
-                    required
-                    aria-required="true"
-                    aria-invalid="false"
-                    aria-describedby="error-login-password"
-                  >
-                  <button
-                    type="button"
-                    class="btn-toggle-password"
-                    aria-label="Mostrar u ocultar contraseña"
-                    data-target="login-password"
-                  >
-                    <i class="fa-regular fa-eye" aria-hidden="true"></i>
+        <div class="hero-footer">
+          <div class="compliance-row">
+            <span><i class="fa-solid fa-lock" aria-hidden="true"></i> TLS 1.3 Strict</span>
+            <span><i class="fa-solid fa-key" aria-hidden="true"></i> OWASP ASVS v5</span>
+            <span><i class="fa-solid fa-microchip" aria-hidden="true"></i> Vanilla Native</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ====================================================================
+           PANEL DERECHO: Centro de Formularios Dinámicos de Autenticación
+           ==================================================================== -->
+      <section class="auth-form-panel" aria-label="Formularios de Autenticación">
+        
+        <!-- Barra de Pestañas Segmentadas (Selector Rápido de Vista) -->
+        <nav class="segmented-nav-wrapper" role="tablist" aria-label="Cambio de modo de acceso">
+          <div class="segmented-track">
+            <button
+              type="button"
+              id="tab-login"
+              class="segmented-tab active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="view-login"
+              data-navigate="view-login"
+            >
+              <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+              <span>Iniciar Sesión</span>
+            </button>
+            <button
+              type="button"
+              id="tab-register"
+              class="segmented-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="view-register"
+              data-navigate="view-register"
+            >
+              <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+              <span>Crear Cuenta</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Cabecera de la Vista Activa -->
+        <header class="panel-header">
+          <div class="header-badge" aria-hidden="true">
+            <i class="fa-solid fa-shield-halved" id="brand-icon"></i>
+          </div>
+          <h1 class="panel-title" id="spa-title">Iniciar Sesión</h1>
+          <p class="panel-subtitle" id="spa-subtitle">Ingresa tus credenciales para acceder a la plataforma</p>
+        </header>
+
+        <!-- Contenedor Viewport de Vistas Dinámicas -->
+        <div class="views-viewport">
+          
+          <!-- ================================================================
+               1. Vista: Iniciar Sesión
+               ================================================================ -->
+          <section id="view-login" class="form-view active" role="tabpanel" aria-labelledby="tab-login">
+            <form id="form-login" novalidate>
+              <div class="form-grid">
+                
+                <!-- Campo: Correo Electrónico -->
+                <div class="form-group" id="group-login-email">
+                  <label for="login-email" class="form-label">
+                    <span>Correo Corporativo</span>
+                    <span class="required-indicator" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-icon-slot" aria-hidden="true">
+                      <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input
+                      type="email"
+                      id="login-email"
+                      name="email"
+                      class="form-input"
+                      placeholder="nombre@organizacion.com"
+                      autocomplete="email"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="error-login-email"
+                    >
+                  </div>
+                  <div id="error-login-email" class="field-error-msg" role="alert">
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                    <span class="error-text"></span>
+                  </div>
+                </div>
+
+                <!-- Campo: Contraseña -->
+                <div class="form-group" id="group-login-password">
+                  <div class="label-row">
+                    <label for="login-password" class="form-label">
+                      <span>Contraseña de Acceso</span>
+                      <span class="required-indicator" aria-hidden="true">*</span>
+                    </label>
+                    <button
+                      type="button"
+                      class="btn-inline-link"
+                      id="link-go-recovery"
+                      data-navigate="view-recovery"
+                    >
+                      ¿Olvidaste tu contraseña?
+                    </button>
+                  </div>
+                  <div class="input-wrapper">
+                    <span class="input-icon-slot" aria-hidden="true">
+                      <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <input
+                      type="password"
+                      id="login-password"
+                      name="password"
+                      class="form-input"
+                      placeholder="••••••••••••"
+                      autocomplete="current-password"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="error-login-password"
+                    >
+                    <button
+                      type="button"
+                      class="btn-toggle-password"
+                      aria-label="Mostrar u ocultar contraseña"
+                      data-target="login-password"
+                    >
+                      <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div id="error-login-password" class="field-error-msg" role="alert">
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                    <span class="error-text"></span>
+                  </div>
+                </div>
+
+                <!-- Botón Principal de Envío -->
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary" id="btn-submit-login">
+                    <span>Acceder al Portal</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div id="error-login-password" class="field-error-msg" role="alert">
-                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
-                  <span class="error-text"></span>
-                </div>
               </div>
 
-              <!-- Acciones y Enlaces de Navegación -->
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="btn-submit-login">
-                  <span>Iniciar Sesión</span>
-                  <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
-                </button>
+              <footer class="form-footer-nav">
+                <span class="footer-prompt">¿No dispones de credenciales activas?</span>
                 <button
                   type="button"
                   class="btn-link"
-                  id="link-go-recovery"
-                  data-navigate="view-recovery"
+                  id="link-go-register"
+                  data-navigate="view-register"
                 >
-                  ¿Olvidaste tu contraseña?
+                  Registrar nueva cuenta de usuario
                 </button>
-              </div>
-            </div>
+              </footer>
+            </form>
+          </section>
 
-            <footer class="form-footer-nav">
-              <span>¿No tienes una cuenta registrada?</span>
-              <button
-                type="button"
-                class="btn-link"
-                id="link-go-register"
-                data-navigate="view-register"
-              >
-                Crear una cuenta nueva
-              </button>
-            </footer>
-          </form>
-        </section>
-
-        <!-- ================================================================
-             2. Vista: Registro de Usuario (Mínimo 5 campos)
-             ================================================================ -->
-        <section id="view-register" class="form-view" aria-labelledby="spa-title">
-          <form id="form-register" novalidate>
-            <div class="form-grid">
-              <!-- Campo 1: Nombres y Apellidos Completos -->
-              <div class="form-group" id="group-register-name">
-                <label for="register-name" class="form-label">
-                  <span>Nombres Completos</span>
-                  <span class="required-badge" aria-hidden="true">*</span>
-                </label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-user input-icon-left" aria-hidden="true"></i>
-                  <input
-                    type="text"
-                    id="register-name"
-                    name="fullname"
-                    class="form-input"
-                    placeholder="Ej. Juan Pérez"
-                    autocomplete="name"
-                    required
-                    aria-required="true"
-                    aria-invalid="false"
-                    aria-describedby="error-register-name"
-                  >
-                </div>
-                <div id="error-register-name" class="field-error-msg" role="alert">
-                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
-                  <span class="error-text"></span>
-                </div>
-              </div>
-
-              <!-- Campo 2: Correo Electrónico -->
-              <div class="form-group" id="group-register-email">
-                <label for="register-email" class="form-label">
-                  <span>Correo Electrónico</span>
-                  <span class="required-badge" aria-hidden="true">*</span>
-                </label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-envelope input-icon-left" aria-hidden="true"></i>
-                  <input
-                    type="email"
-                    id="register-email"
-                    name="email"
-                    class="form-input"
-                    placeholder="juan.perez@dominio.com"
-                    autocomplete="email"
-                    required
-                    aria-required="true"
-                    aria-invalid="false"
-                    aria-describedby="error-register-email"
-                  >
-                </div>
-                <div id="error-register-email" class="field-error-msg" role="alert">
-                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
-                  <span class="error-text"></span>
-                </div>
-              </div>
-
-              <!-- Fila de 2 Columnas: Edad y Teléfono -->
-              <div class="form-row-2col">
-                <!-- Campo 3: Edad -->
-                <div class="form-group" id="group-register-age">
-                  <label for="register-age" class="form-label">
-                    <span>Edad</span>
-                    <span class="required-badge" aria-hidden="true">*</span>
+          <!-- ================================================================
+               2. Vista: Registro de Usuario (Mínimo 5 Campos Requeridos)
+               ================================================================ -->
+          <section id="view-register" class="form-view" role="tabpanel" aria-labelledby="tab-register">
+            <form id="form-register" novalidate>
+              <div class="form-grid">
+                
+                <!-- Campo 1: Nombres y Apellidos Completos -->
+                <div class="form-group" id="group-register-name">
+                  <label for="register-name" class="form-label">
+                    <span>Nombres Completos</span>
+                    <span class="required-indicator" aria-hidden="true">*</span>
                   </label>
                   <div class="input-wrapper">
-                    <i class="fa-solid fa-calendar input-icon-left" aria-hidden="true"></i>
+                    <span class="input-icon-slot" aria-hidden="true">
+                      <i class="fa-solid fa-user"></i>
+                    </span>
                     <input
-                      type="number"
-                      id="register-age"
-                      name="age"
+                      type="text"
+                      id="register-name"
+                      name="fullname"
                       class="form-input"
-                      placeholder="18"
-                      min="14"
-                      max="120"
+                      placeholder="Ej. Juan Carlos Pérez"
+                      autocomplete="name"
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-register-age"
+                      aria-describedby="error-register-name"
                     >
                   </div>
-                  <div id="error-register-age" class="field-error-msg" role="alert">
+                  <div id="error-register-name" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
                   </div>
                 </div>
 
-                <!-- Campo 4: Teléfono -->
-                <div class="form-group" id="group-register-phone">
-                  <label for="register-phone" class="form-label">
-                    <span>Teléfono</span>
-                    <span class="required-badge" aria-hidden="true">*</span>
+                <!-- Campo 2: Correo Electrónico -->
+                <div class="form-group" id="group-register-email">
+                  <label for="register-email" class="form-label">
+                    <span>Correo Electrónico</span>
+                    <span class="required-indicator" aria-hidden="true">*</span>
                   </label>
                   <div class="input-wrapper">
-                    <i class="fa-solid fa-phone input-icon-left" aria-hidden="true"></i>
+                    <span class="input-icon-slot" aria-hidden="true">
+                      <i class="fa-solid fa-envelope"></i>
+                    </span>
                     <input
-                      type="tel"
-                      id="register-phone"
-                      name="phone"
+                      type="email"
+                      id="register-email"
+                      name="email"
                       class="form-input"
-                      placeholder="0991234567"
-                      autocomplete="tel"
+                      placeholder="juan.perez@empresa.com"
+                      autocomplete="email"
                       required
                       aria-required="true"
                       aria-invalid="false"
-                      aria-describedby="error-register-phone"
+                      aria-describedby="error-register-email"
                     >
                   </div>
-                  <div id="error-register-phone" class="field-error-msg" role="alert">
+                  <div id="error-register-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
                   </div>
                 </div>
-              </div>
 
-              <!-- Campo 5: Contraseña de Registro -->
-              <div class="form-group" id="group-register-password">
-                <label for="register-password" class="form-label">
-                  <span>Contraseña</span>
-                  <span class="required-badge" aria-hidden="true">*</span>
-                </label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-lock input-icon-left" aria-hidden="true"></i>
-                  <input
-                    type="password"
-                    id="register-password"
-                    name="password"
-                    class="form-input"
-                    placeholder="Mínimo 8 caracteres (letras y números)"
-                    autocomplete="new-password"
-                    required
-                    aria-required="true"
-                    aria-invalid="false"
-                    aria-describedby="error-register-password"
-                  >
-                  <button
-                    type="button"
-                    class="btn-toggle-password"
-                    aria-label="Mostrar u ocultar contraseña"
-                    data-target="register-password"
-                  >
-                    <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                <!-- Fila Doble Columna: Edad y Teléfono -->
+                <div class="form-row-2col">
+                  <!-- Campo 3: Edad -->
+                  <div class="form-group" id="group-register-age">
+                    <label for="register-age" class="form-label">
+                      <span>Edad</span>
+                      <span class="required-indicator" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                      <span class="input-icon-slot" aria-hidden="true">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <input
+                        type="number"
+                        id="register-age"
+                        name="age"
+                        class="form-input"
+                        placeholder="25"
+                        min="14"
+                        max="120"
+                        required
+                        aria-required="true"
+                        aria-invalid="false"
+                        aria-describedby="error-register-age"
+                      >
+                    </div>
+                    <div id="error-register-age" class="field-error-msg" role="alert">
+                      <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                      <span class="error-text"></span>
+                    </div>
+                  </div>
+
+                  <!-- Campo 4: Teléfono -->
+                  <div class="form-group" id="group-register-phone">
+                    <label for="register-phone" class="form-label">
+                      <span>Teléfono</span>
+                      <span class="required-indicator" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                      <span class="input-icon-slot" aria-hidden="true">
+                        <i class="fa-solid fa-phone"></i>
+                      </span>
+                      <input
+                        type="tel"
+                        id="register-phone"
+                        name="phone"
+                        class="form-input"
+                        placeholder="+593 991234567"
+                        autocomplete="tel"
+                        required
+                        aria-required="true"
+                        aria-invalid="false"
+                        aria-describedby="error-register-phone"
+                      >
+                    </div>
+                    <div id="error-register-phone" class="field-error-msg" role="alert">
+                      <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                      <span class="error-text"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Campo 5: Contraseña con Indicador Interactivo de Seguridad -->
+                <div class="form-group" id="group-register-password">
+                  <label for="register-password" class="form-label">
+                    <span>Contraseña Segura</span>
+                    <span class="required-indicator" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-icon-slot" aria-hidden="true">
+                      <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <input
+                      type="password"
+                      id="register-password"
+                      name="password"
+                      class="form-input"
+                      placeholder="Mínimo 8 caracteres mixtos"
+                      autocomplete="new-password"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="error-register-password"
+                    >
+                    <button
+                      type="button"
+                      class="btn-toggle-password"
+                      aria-label="Mostrar u ocultar contraseña"
+                      data-target="register-password"
+                    >
+                      <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <!-- Medidor de Fortaleza Dinámico (UX Premium) -->
+                  <div class="password-strength-box" id="password-strength-box" aria-live="polite">
+                    <div class="strength-meter-bar">
+                      <div class="strength-progress" id="strength-progress"></div>
+                    </div>
+                    <div class="strength-rules">
+                      <span class="rule-badge" id="rule-length">
+                        <i class="fa-solid fa-circle-check"></i> 8+ Caracteres
+                      </span>
+                      <span class="rule-badge" id="rule-letter">
+                        <i class="fa-solid fa-circle-check"></i> Letras
+                      </span>
+                      <span class="rule-badge" id="rule-number">
+                        <i class="fa-solid fa-circle-check"></i> Números
+                      </span>
+                    </div>
+                  </div>
+
+                  <div id="error-register-password" class="field-error-msg" role="alert">
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                    <span class="error-text"></span>
+                  </div>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary" id="btn-submit-register">
+                    <span>Crear Cuenta Corporativa</span>
+                    <i class="fa-solid fa-user-check" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div id="error-register-password" class="field-error-msg" role="alert">
-                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
-                  <span class="error-text"></span>
-                </div>
               </div>
 
-              <!-- Acciones y Enlaces de Registro -->
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="btn-submit-register">
-                  <span>Registrar Cuenta</span>
-                  <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+              <footer class="form-footer-nav">
+                <span class="footer-prompt">¿Ya estás registrado en la red?</span>
+                <button
+                  type="button"
+                  class="btn-link"
+                  id="link-go-login-from-reg"
+                  data-navigate="view-login"
+                >
+                  Iniciar sesión con tu cuenta
                 </button>
-              </div>
-            </div>
+              </footer>
+            </form>
+          </section>
 
-            <footer class="form-footer-nav">
-              <span>¿Ya posees una cuenta registrada?</span>
-              <button
-                type="button"
-                class="btn-link"
-                id="link-go-login-from-reg"
-                data-navigate="view-login"
-              >
-                Iniciar Sesión
-              </button>
-            </footer>
-          </form>
-        </section>
-
-        <!-- ================================================================
-             3. Vista: Recuperación de Contraseña
-             ================================================================ -->
-        <section id="view-recovery" class="form-view" aria-labelledby="spa-title">
-          <form id="form-recovery" novalidate>
-            <div class="form-grid">
-              <!-- Campo: Correo Electrónico para Recuperación -->
-              <div class="form-group" id="group-recovery-email">
-                <label for="recovery-email" class="form-label">
-                  <span>Correo de Recuperación</span>
-                  <span class="required-badge" aria-hidden="true">*</span>
-                </label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-envelope input-icon-left" aria-hidden="true"></i>
-                  <input
-                    type="email"
-                    id="recovery-email"
-                    name="email"
-                    class="form-input"
-                    placeholder="tu-correo@dominio.com"
-                    autocomplete="email"
-                    required
-                    aria-required="true"
-                    aria-invalid="false"
-                    aria-describedby="error-recovery-email"
-                  >
+          <!-- ================================================================
+               3. Vista: Recuperación de Contraseña
+               ================================================================ -->
+          <section id="view-recovery" class="form-view" role="tabpanel" aria-labelledby="spa-title">
+            <form id="form-recovery" novalidate>
+              <div class="form-grid">
+                
+                <div class="recovery-intro-banner">
+                  <i class="fa-solid fa-key" aria-hidden="true"></i>
+                  <p>
+                    Introduce el correo registrado. Generaremos un token seguro con caducidad temporal para el restablecimiento de tu contraseña.
+                  </p>
                 </div>
-                <div id="error-recovery-email" class="field-error-msg" role="alert">
-                  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
-                  <span class="error-text"></span>
+
+                <!-- Campo: Correo Electrónico para Recuperación -->
+                <div class="form-group" id="group-recovery-email">
+                  <label for="recovery-email" class="form-label">
+                    <span>Correo Institucional de Recuperación</span>
+                    <span class="required-indicator" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-icon-slot" aria-hidden="true">
+                      <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input
+                      type="email"
+                      id="recovery-email"
+                      name="email"
+                      class="form-input"
+                      placeholder="tu-correo@empresa.com"
+                      autocomplete="email"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="error-recovery-email"
+                    >
+                  </div>
+                  <div id="error-recovery-email" class="field-error-msg" role="alert">
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                    <span class="error-text"></span>
+                  </div>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary" id="btn-submit-recovery">
+                    <span>Emitir Instrucciones de Recuperación</span>
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                  </button>
                 </div>
               </div>
 
-              <!-- Acciones y Enlaces de Recuperación -->
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="btn-submit-recovery">
-                  <span>Enviar Instrucciones</span>
-                  <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              <footer class="form-footer-nav">
+                <span class="footer-prompt">¿Recordaste tus credenciales?</span>
+                <button
+                  type="button"
+                  class="btn-link"
+                  id="link-go-login-from-rec"
+                  data-navigate="view-login"
+                >
+                  Regresar a Iniciar Sesión
                 </button>
-              </div>
-            </div>
+              </footer>
+            </form>
+          </section>
 
-            <footer class="form-footer-nav">
-              <span>¿Recordaste tu contraseña?</span>
-              <button
-                type="button"
-                class="btn-link"
-                id="link-go-login-from-rec"
-                data-navigate="view-login"
-              >
-                Volver a Iniciar Sesión
-              </button>
-            </footer>
-          </form>
-        </section>
-      </div>
-    </section>
-  </main>
+        </div>
+      </section>
+    </main>
+  </div>
 
-  <!-- Región Accesible para Notificaciones Flotantes (Toasts) -->
+  <!-- Región Accesible para Notificaciones Flotantes (Toasts Estilo Sonner/Clerk) -->
   <aside
     id="toast-container"
     class="toast-container"

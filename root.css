@@ -1,68 +1,73 @@
 /**
- * root.css - Tokens de Diseño y Variables Globales del Sistema
- * Arquitectura CSS Modular: Declaración exclusiva de variables en :root
+ * root.css - Design System Tokens & Semantic Variables
+ * Arquitectura CSS Modular: Sistema de diseño de alta gama inspirado en Linear/Clerk
  */
 
 :root {
   /* ==========================================================================
-     1. Paleta de Colores (5 Familias Estándar + Semántica)
+     1. Espacio de Color HSL: Dark Enterprise Theme de Alta Precisión
      ========================================================================== */
-  /* Familia Primaria: Azul Corporativo / Acceso Seguro */
-  --color-primary-h: 224;
-  --color-primary-s: 76%;
-  --color-primary-l: 48%;
+  /* Tonos Primarios de Marca: Índigo Tecnológico y Cobalto */
+  --color-primary-h: 226;
+  --color-primary-s: 70%;
+  --color-primary-l: 55%;
   --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
-  --color-primary-hover: hsl(var(--color-primary-h), var(--color-primary-s), 40%);
-  --color-primary-active: hsl(var(--color-primary-h), var(--color-primary-s), 32%);
-  --color-primary-subtle: hsl(var(--color-primary-h), 85%, 96%);
-  --color-primary-glow: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.25);
+  --color-primary-hover: hsl(var(--color-primary-h), var(--color-primary-s), 62%);
+  --color-primary-active: hsl(var(--color-primary-h), var(--color-primary-s), 45%);
+  --color-primary-subtle: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.12);
+  --color-primary-glow: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.35);
 
-  /* Familia Secundaria: Índigo / Enfoque de Navegación */
-  --color-secondary-h: 245;
-  --color-secondary-s: 58%;
-  --color-secondary-l: 51%;
-  --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
-  --color-secondary-hover: hsl(var(--color-secondary-h), var(--color-secondary-s), 43%);
+  /* Acento Secundario: Cyan Criptográfico */
+  --color-accent-cyan: hsl(190, 95%, 48%);
+  --color-accent-cyan-subtle: hsla(190, 95%, 48%, 0.12);
 
-  /* Familia de Acentos: Ámbar / Destacados */
-  --color-accent: hsl(38, 92%, 50%);
+  /* Superficies y Fondos en Profundidad Escalonada (Zinc / Slate Deep Layers) */
+  --bg-app: #090d16;
+  --bg-gradient: radial-gradient(circle at 10% 20%, #172554 0%, #0b1329 45%, #050811 100%);
+  --surface-panel: #0d1527;
+  --surface-card: #111c35;
+  --surface-card-subtle: #172442;
+  --surface-input: #0b1325;
+  --surface-input-focus: #101c38;
+  --surface-tab-track: #0a1122;
 
-  /* Familia Neutral: Escala de Grises y Superficies de Alta Claridad */
-  --color-bg-base: #0f172a;
-  --color-bg-subtle: #1e293b;
-  --color-surface-card: #ffffff;
-  --color-surface-card-subtle: #f8fafc;
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
-  --color-border-focus: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+  /* Bordes de Definición Milimétrica */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.14);
+  --border-hover: rgba(255, 255, 255, 0.25);
+  --border-focus: hsl(var(--color-primary-h), var(--color-primary-s), 65%);
+  --border-glow: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.4);
 
-  --color-text-main: #0f172a;
-  --color-text-body: #334155;
-  --color-text-muted: #64748b;
-  --color-text-inverted: #ffffff;
+  /* Jerarquía de Texto de Alto Contraste */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+  --text-inverted: #020617;
 
-  /* Familia Semántica y Estados de Retroalimentación */
+  /* Estados Semánticos Vivos y Guiados */
   --color-success: #10b981;
-  --color-success-bg: #ecfdf5;
-  --color-success-border: #a7f3d0;
-  --color-success-text: #065f46;
+  --color-success-subtle: rgba(16, 185, 129, 0.15);
+  --color-success-border: rgba(16, 185, 129, 0.35);
+  --color-success-text: #34d399;
 
-  --color-danger: #ef4444;
-  --color-danger-bg: #fef2f2;
-  --color-danger-border: #fecaca;
-  --color-danger-text: #991b1b;
+  --color-danger: #f43f5e;
+  --color-danger-subtle: rgba(244, 63, 94, 0.15);
+  --color-danger-border: rgba(244, 63, 94, 0.35);
+  --color-danger-text: #fb7185;
 
   --color-warning: #f59e0b;
-  --color-warning-bg: #fffbeb;
-  --color-warning-border: #fde68a;
-  --color-warning-text: #92400e;
+  --color-warning-subtle: rgba(245, 158, 11, 0.15);
+  --color-warning-border: rgba(245, 158, 11, 0.35);
+  --color-warning-text: #fbbf24;
 
   /* ==========================================================================
-     2. Tipografía y Jerarquía Visual
+     2. Tipografía Deliberada y Legibilidad
      ========================================================================== */
-  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-family-heading: 'Plus Jakarta Sans', var(--font-family-sans);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans', var(--font-sans);
 
+  --font-size-2xs: 0.6875rem; /* 11px */
   --font-size-xs: 0.75rem;     /* 12px */
   --font-size-sm: 0.875rem;    /* 14px */
   --font-size-base: 1rem;      /* 16px */
@@ -70,19 +75,23 @@
   --font-size-lg: 1.25rem;     /* 20px */
   --font-size-xl: 1.5rem;      /* 24px */
   --font-size-2xl: 1.875rem;   /* 30px */
+  --font-size-3xl: 2.25rem;    /* 36px */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 
   --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.625;
 
   /* ==========================================================================
-     3. Espaciados Modulares
+     3. Sistema de Espaciado Modular
      ========================================================================== */
+  --space-3xs: 0.125rem; /* 2px */
   --space-2xs: 0.25rem;  /* 4px */
   --space-xs: 0.5rem;    /* 8px */
   --space-sm: 0.75rem;   /* 12px */
@@ -90,40 +99,44 @@
   --space-lg: 1.5rem;    /* 24px */
   --space-xl: 2rem;      /* 32px */
   --space-2xl: 2.5rem;   /* 40px */
+  --space-3xl: 3.5rem;   /* 56px */
 
   /* ==========================================================================
-     4. Bordes Redondeados (Border Radius)
+     4. Radios de Borde Disciplinados (Geometría Moderna)
      ========================================================================== */
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
   --radius-full: 9999px;
 
   /* ==========================================================================
-     5. Sombras de Elevación (Box Shadow)
+     5. Sombras de Elevación y Auras Ópticas
      ========================================================================== */
-  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
-  --shadow-toast: 0 12px 28px -4px rgba(15, 23, 42, 0.2), 0 4px 8px -2px rgba(15, 23, 42, 0.1);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.45), 0 2px 4px -2px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px var(--border-subtle);
+  --shadow-button-primary: 0 4px 14px 0 hsla(var(--color-primary-h), var(--color-primary-s), 50%, 0.4);
+  --shadow-toast: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
 
   /* ==========================================================================
-     6. Tiempos y Curvas de Transición
+     6. Transiciones y Curvas de Aceleración Orgánicas
      ========================================================================== */
-  --transition-duration-fast: 150ms;
-  --transition-duration-normal: 300ms;
-  --transition-duration-slow: 450ms;
-  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 280ms;
+  --duration-slow: 420ms;
 
   /* ==========================================================================
-     7. Z-Index de Capas
+     7. Capas de Superposición Z-Index
      ========================================================================== */
+  --z-base: 1;
   --z-card: 10;
-  --z-floating: 100;
+  --z-header: 50;
   --z-toast: 1000;
   --z-skip-link: 9999;
 }

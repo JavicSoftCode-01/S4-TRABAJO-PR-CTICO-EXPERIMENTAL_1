@@ -1,5 +1,5 @@
 /**
- * script.js - Lógica de Negocio, Controlador SPA, Validaciones Defensivas y A11y
+ * script.js - Lógica de Negocio, Controlador SPA, Validaciones Defensivas y UX de Alta Fidelidad
  * 
  * NOTA DE SEGURIDAD ARQUITECTÓNICA:
  * Todas las validaciones ejecutadas en este script son exclusivamente del lado del CLIENTE (Front-End)
@@ -30,20 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;')
-      .replace(/\//g, '&#x2F;');
+      .replace(/\//g, '&#2F;');
   };
 
   /* ==========================================================================
-     2. Módulo de Notificaciones: Custom Toasts / Alertas Flotantes Dinámicas
+     2. Módulo de Notificaciones: Custom Toasts (Estilo Sonner / Clerk)
      ========================================================================== */
   const toastContainer = document.getElementById('toast-container');
 
   /**
-   * Genera e inyecta dinámicamente una alerta personalizada tipo Toast con accesibilidad aria-live.
+   * Genera e inyecta dinámicamente una alerta flotante accesible en el DOM.
    * @param {string} title - Título del mensaje
    * @param {string} message - Cuerpo descriptivo del mensaje
-   * @param {'success'|'error'|'warning'} type - Tipo semántico de la notificación
-   * @param {number} duration - Duración en milisegundos antes del autocierre (default: 4000ms)
+   * @param {'success'|'error'|'warning'} type - Tipo semántico
+   * @param {number} duration - Duración en milisegundos (default: 4000ms)
    */
   const showToast = (title, message, type = 'error', duration = 4000) => {
     if (!toastContainer) return;
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dismissToast();
     }, duration);
 
-    // Pausar auto-cierre si el usuario coloca el cursor sobre el toast para leerlo
+    // Pausar auto-cierre si el usuario inspecciona el toast con el cursor
     toast.addEventListener('mouseenter', () => clearTimeout(autoDismissTimer));
     toast.addEventListener('mouseleave', () => {
       setTimeout(dismissToast, 1500);
@@ -99,37 +99,41 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* ==========================================================================
-     3. Módulo SPA: Enrutamiento Visual y Transiciones en el DOM
+     3. Módulo SPA: Enrutamiento Visual y Gestión de Segmented Tabs
      ========================================================================== */
   const spaTitle = document.getElementById('spa-title');
   const spaSubtitle = document.getElementById('spa-subtitle');
   const brandIcon = document.getElementById('brand-icon');
   const views = document.querySelectorAll('.form-view');
+  const tabLogin = document.getElementById('tab-login');
+  const tabRegister = document.getElementById('tab-register');
 
-  // Metadatos para cada estado de la SPA
   const viewMetadata = {
     'view-login': {
       title: 'Iniciar Sesión',
-      subtitle: 'Ingresa tus credenciales para acceder a la plataforma',
+      subtitle: 'Ingresa tus credenciales corporativas para acceder',
       iconClass: 'fa-solid fa-shield-halved',
-      firstInputId: 'login-email'
+      firstInputId: 'login-email',
+      activeTab: 'tab-login'
     },
     'view-register': {
-      title: 'Crear una Cuenta',
+      title: 'Crear Cuenta Corporativa',
       subtitle: 'Completa los 5 campos obligatorios para registrarte',
       iconClass: 'fa-solid fa-user-plus',
-      firstInputId: 'register-name'
+      firstInputId: 'register-name',
+      activeTab: 'tab-register'
     },
     'view-recovery': {
       title: 'Recuperar Contraseña',
-      subtitle: 'Ingresa tu correo para recibir las instrucciones de acceso',
+      subtitle: 'Ingresa tu correo institucional para recibir el token de acceso',
       iconClass: 'fa-solid fa-key',
-      firstInputId: 'recovery-email'
+      firstInputId: 'recovery-email',
+      activeTab: null
     }
   };
 
   /**
-   * Alterna de manera fluida entre las vistas del SPA sin recargar la página.
+   * Alterna de manera fluida entre las vistas de la SPA sin recargar la página.
    * @param {string} targetViewId - Identificador del contenedor de vista destino
    */
   const switchView = (targetViewId) => {
@@ -144,22 +148,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // Activar vista seleccionada
     targetView.classList.add('active');
 
-    // Actualizar encabezados contextuales
+    // Sincronizar pestañas segmentadas
     const meta = viewMetadata[targetViewId];
+    if (tabLogin && tabRegister) {
+      if (meta.activeTab === 'tab-login') {
+        tabLogin.classList.add('active');
+        tabLogin.setAttribute('aria-selected', 'true');
+        tabRegister.classList.remove('active');
+        tabRegister.setAttribute('aria-selected', 'false');
+      } else if (meta.activeTab === 'tab-register') {
+        tabRegister.classList.add('active');
+        tabRegister.setAttribute('aria-selected', 'true');
+        tabLogin.classList.remove('active');
+        tabLogin.setAttribute('aria-selected', 'false');
+      } else {
+        tabLogin.classList.remove('active');
+        tabLogin.setAttribute('aria-selected', 'false');
+        tabRegister.classList.remove('active');
+        tabRegister.setAttribute('aria-selected', 'false');
+      }
+    }
+
+    // Actualizar encabezados contextuales
     if (spaTitle) spaTitle.textContent = meta.title;
     if (spaSubtitle) spaSubtitle.textContent = meta.subtitle;
     if (brandIcon) {
       brandIcon.className = meta.iconClass;
     }
 
-    // A11y: Trasladar el foco del cursor al primer campo del formulario activo
+    // A11y: Transferir foco al primer campo interactivo
     setTimeout(() => {
       const firstInput = document.getElementById(meta.firstInputId);
       if (firstInput) firstInput.focus();
-    }, 100);
+    }, 120);
   };
 
-  // Delegación de eventos para botones de navegación SPA
+  // Delegación de eventos para elementos con atributo data-navigate
   document.querySelectorAll('[data-navigate]').forEach(button => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -199,51 +223,68 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
-     5. Módulo de Validaciones Rigurosas (Reglas de Negocio Client-Side)
+     5. Módulo de Fuerza de Contraseña Interactivo (Live UX Strength Meter)
      ========================================================================== */
-  /**
-   * Reglas de validación atómicas
-   */
+  const registerPasswordInput = document.getElementById('register-password');
+  const strengthProgress = document.getElementById('strength-progress');
+  const ruleLength = document.getElementById('rule-length');
+  const ruleLetter = document.getElementById('rule-letter');
+  const ruleNumber = document.getElementById('rule-number');
+
+  if (registerPasswordInput && strengthProgress) {
+    registerPasswordInput.addEventListener('input', () => {
+      const val = registerPasswordInput.value;
+      const hasLength = val.length >= 8;
+      const hasLetter = /[a-zA-Z]/.test(val);
+      const hasNumber = /[0-9]/.test(val);
+
+      if (ruleLength) ruleLength.classList.toggle('valid', hasLength);
+      if (ruleLetter) ruleLetter.classList.toggle('valid', hasLetter);
+      if (ruleNumber) ruleNumber.classList.toggle('valid', hasNumber);
+
+      const score = [hasLength, hasLetter, hasNumber].filter(Boolean).length;
+
+      strengthProgress.className = 'strength-progress';
+      if (val.length === 0) {
+        strengthProgress.style.width = '0%';
+      } else if (score === 1) {
+        strengthProgress.classList.add('weak');
+      } else if (score === 2) {
+        strengthProgress.classList.add('medium');
+      } else if (score === 3) {
+        strengthProgress.classList.add('strong');
+      }
+    });
+  }
+
+  /* ==========================================================================
+     6. Módulo de Validaciones Rigurosas (Reglas de Negocio Client-Side)
+     ========================================================================== */
   const validationRules = {
-    // Formato de correo electrónico estándar (RFC 5322 simplificado)
     isValidEmail: (email) => {
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
       return emailRegex.test(email.trim());
     },
-
-    // Contraseña: Mínimo 8 caracteres, al menos una letra y un número
     isValidPassword: (password) => {
       if (password.length < 8) return false;
       const hasLetter = /[a-zA-Z]/.test(password);
       const hasNumber = /[0-9]/.test(password);
       return hasLetter && hasNumber;
     },
-
-    // Rango numérico de edad (14 a 120 años)
     isValidAge: (age) => {
       const num = parseInt(age, 10);
       return !isNaN(num) && num >= 14 && num <= 120;
     },
-
-    // Teléfono: Entre 8 y 15 dígitos numéricos (permite prefijo internacional '+')
     isValidPhone: (phone) => {
       const phoneRegex = /^\+?[0-9]{8,15}$/;
       return phoneRegex.test(phone.replace(/[\s-]/g, ''));
     },
-
-    // Nombres completos: Mínimo 3 caracteres, letras y espacios
     isValidName: (name) => {
       const trimmed = name.trim();
       return trimmed.length >= 3 && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(trimmed);
     }
   };
 
-  /**
-   * Actualiza el estado visual y semántico de un campo de formulario (inline)
-   * @param {HTMLElement} input - Elemento input a evaluar
-   * @param {boolean} isValid - Verdadero si pasó la validación
-   * @param {string} errorMessage - Mensaje de error para mostrar en caso de fallo
-   */
   const setFieldValidationState = (input, isValid, errorMessage = '') => {
     const group = input.closest('.form-group');
     if (!group) return;
@@ -266,11 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  /**
-   * Valida un campo individual según su nombre y tipo
-   * @param {HTMLInputElement} input - Campo a evaluar
-   * @returns {{isValid: boolean, error: string}}
-   */
   const validateField = (input) => {
     const value = input.value;
     const name = input.name;
@@ -282,13 +318,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (name === 'email') {
       if (!validationRules.isValidEmail(value)) {
-        return { isValid: false, error: 'Ingresa un formato de correo válido (ej: usuario@dominio.com)' };
+        return { isValid: false, error: 'Formato de correo no válido (ej: usuario@empresa.com)' };
       }
     }
 
     if (name === 'password') {
       if (!validationRules.isValidPassword(value)) {
-        return { isValid: false, error: 'La contraseña debe tener mínimo 8 caracteres, incluyendo letras y números' };
+        return { isValid: false, error: 'Mínimo 8 caracteres, conteniendo al menos letras y números' };
       }
     }
 
@@ -306,14 +342,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (name === 'phone') {
       if (!validationRules.isValidPhone(value)) {
-        return { isValid: false, error: 'Ingresa un número telefónico válido (entre 8 y 15 dígitos)' };
+        return { isValid: false, error: 'Número telefónico no válido (entre 8 y 15 dígitos)' };
       }
     }
 
     return { isValid: true, error: '' };
   };
 
-  // Vincular eventos blur e input para feedback visual en tiempo real
+  // Enlazar eventos blur e input para feedback visual en tiempo real
   const inputs = document.querySelectorAll('.form-input');
   inputs.forEach(input => {
     input.addEventListener('blur', () => {
@@ -333,14 +369,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
-     6. Controladores de Eventos Submit (Intercepción y Prevención por Defecto)
+     7. Controladores de Eventos Submit (Intercepción y Prevención por Defecto)
      ========================================================================== */
 
   // Formulario 1: Inicio de Sesión
   const formLogin = document.getElementById('form-login');
   if (formLogin) {
     formLogin.addEventListener('submit', (e) => {
-      // Regla obligatoria: Prevenir el refresco automático de la página
       e.preventDefault();
 
       const emailInput = document.getElementById('login-email');
@@ -353,15 +388,14 @@ document.addEventListener('DOMContentLoaded', () => {
       setFieldValidationState(passInput, passResult.isValid, passResult.error);
 
       if (!emailResult.isValid || !passResult.isValid) {
-        showToast('Error de Validación', 'Por favor corrige los campos destacados antes de continuar.', 'error');
+        showToast('Error de Validación', 'Verifica los campos señalados antes de ingresar.', 'error');
         if (!emailResult.isValid) emailInput.focus();
         else passInput.focus();
         return;
       }
 
-      // Simulación de autenticación exitosa (En producción: petición fetch/axios al backend)
       const sanitizedEmail = escapeHTML(emailInput.value.trim());
-      showToast('Acceso Concedido', `Bienvenido al sistema: ${sanitizedEmail}`, 'success');
+      showToast('Autenticación Exitosa', `Sesión iniciada correctamente para: ${sanitizedEmail}`, 'success');
       formLogin.reset();
       document.querySelectorAll('#form-login .form-group').forEach(g => g.classList.remove('is-valid'));
     });
@@ -371,7 +405,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const formRegister = document.getElementById('form-register');
   if (formRegister) {
     formRegister.addEventListener('submit', (e) => {
-      // Regla obligatoria: Prevenir recarga nativa
       e.preventDefault();
 
       const nameInput = document.getElementById('register-name');
@@ -401,19 +434,22 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (hasError) {
-        showToast('Formulario Incompleto', 'Se encontraron errores en los datos ingresados. Revisa los campos resaltados.', 'error');
+        showToast('Formulario Incompleto', 'Corrige los errores destacados en los 5 campos obligatorios.', 'error');
         if (firstErrorField) firstErrorField.focus();
         return;
       }
 
-      // Registro exitoso simulado con escape defensivo
       const safeName = escapeHTML(nameInput.value.trim());
-      showToast('Registro Exitoso', `Cuenta creada con éxito para ${safeName}. Ahora puedes iniciar sesión.`, 'success');
+      showToast('Cuenta Creada', `Bienvenido al sistema, ${safeName}. Ya puedes iniciar sesión.`, 'success');
 
       formRegister.reset();
       document.querySelectorAll('#form-register .form-group').forEach(g => g.classList.remove('is-valid'));
+      if (strengthProgress) {
+        strengthProgress.className = 'strength-progress';
+        strengthProgress.style.width = '0%';
+      }
+      [ruleLength, ruleLetter, ruleNumber].forEach(r => r && r.classList.remove('valid'));
 
-      // Retornar al usuario a la vista de login tras 1.2 segundos
       setTimeout(() => {
         switchView('view-login');
       }, 1200);
@@ -424,7 +460,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const formRecovery = document.getElementById('form-recovery');
   if (formRecovery) {
     formRecovery.addEventListener('submit', (e) => {
-      // Regla obligatoria: Prevenir recarga nativa
       e.preventDefault();
 
       const emailInput = document.getElementById('recovery-email');
@@ -438,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const safeEmail = escapeHTML(emailInput.value.trim());
-      showToast('Instrucciones Enviadas', `Se ha remitido el enlace de recuperación a: ${safeEmail}`, 'success');
+      showToast('Instrucciones Emitidas', `Se ha generado un token de recuperación para: ${safeEmail}`, 'success');
 
       formRecovery.reset();
       document.querySelectorAll('#form-recovery .form-group').forEach(g => g.classList.remove('is-valid'));
