@@ -30,13 +30,14 @@ function runL7Tests() {
   assert.ok(htmlContent.includes('id="view-recovery"'), 'Falta vista view-recovery');
   console.log('  ✔ Tres vistas SPA declaradas (Login, Register, Recovery)');
 
-  // Test 7.4: Mínimo 5 campos en el formulario de Registro con tipos adecuados
+  // Test 7.4: Mínimo 5 campos (ahora 6 completos) en el formulario de Registro con tipos adecuados
   const requiredInputs = [
     { id: 'register-name', type: 'text' },
     { id: 'register-email', type: 'email' },
     { id: 'register-age', type: 'number' },
     { id: 'register-phone', type: 'tel' },
-    { id: 'register-password', type: 'password' }
+    { id: 'register-password', type: 'password' },
+    { id: 'register-confirm-password', type: 'password' }
   ];
 
   requiredInputs.forEach(({ id, type }) => {
@@ -44,7 +45,7 @@ function runL7Tests() {
     assert.ok(htmlContent.includes(`type="${type}"`), `Input #${id} debe ser de tipo ${type}`);
     assert.ok(htmlContent.includes(`for="${id}"`), `Falta <label for="${id}"> para accesibilidad`);
   });
-  console.log('  ✔ Formulario de Registro cuenta con los 5 campos exigidos y etiquetas <label for> estrictas');
+  console.log('  ✔ Formulario de Registro cuenta con los campos exigidos y etiquetas <label for> estrictas');
 
   // Test 7.5: Enlace de hojas de estilo modulares (root.css y main.css)
   assert.ok(htmlContent.includes('href="root.css"'), 'Falta enlace a root.css');

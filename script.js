@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     'view-register': {
       title: 'Crear Cuenta Corporativa',
-      subtitle: 'Completa los 5 campos obligatorios para registrarte',
+      subtitle: 'Completa los campos requeridos para registrarte',
       iconClass: 'fa-solid fa-user-plus',
       formId: 'form-register',
       activeTab: 'tab-register'
@@ -287,6 +287,13 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (score === 3) {
         strengthProgress.classList.add('strong');
       }
+
+      // Revalidar confirmación si el usuario ya escribió en ella
+      const confirmInput = document.getElementById('register-confirm-password');
+      if (confirmInput && confirmInput.value.trim().length > 0) {
+        const confirmResult = validateField(confirmInput);
+        setFieldValidationState(confirmInput, confirmResult.isValid, confirmResult.error);
+      }
     });
   }
 
@@ -390,6 +397,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    if (name === 'confirmPassword') {
+      const origPass = document.getElementById('register-password');
+      if (origPass && value !== origPass.value) {
+        return { isValid: false, error: 'Las contraseñas no coinciden' };
+      }
+    }
+
     return { isValid: true, error: '' };
   };
 
@@ -475,19 +489,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const ageInput = document.getElementById('register-age');
       const phoneInput = document.getElementById('register-phone');
       const passInput = document.getElementById('register-password');
+      const confirmPassInput = document.getElementById('register-confirm-password');
 
       const fields = [
         { el: nameInput, label: 'Nombres' },
         { el: emailInput, label: 'Correo' },
         { el: ageInput, label: 'Edad' },
         { el: phoneInput, label: 'Teléfono' },
-        { el: passInput, label: 'Contraseña' }
+        { el: passInput, label: 'Contraseña' },
+        { el: confirmPassInput, label: 'Confirmar Contraseña' }
       ];
 
       let hasError = false;
       let firstErrorField = null;
 
       fields.forEach(field => {
+        if (!field.el) return;
         const result = validateField(field.el);
         setFieldValidationState(field.el, result.isValid, result.error);
         if (!result.isValid) {
@@ -497,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (hasError) {
-        showToast('Formulario Incompleto', 'Corrige los errores destacados en los 5 campos obligatorios.', 'error');
+        showToast('Formulario Incompleto', 'Corrige los errores destacados en los campos del registro.', 'error');
         if (firstErrorField) firstErrorField.focus();
         return;
       }

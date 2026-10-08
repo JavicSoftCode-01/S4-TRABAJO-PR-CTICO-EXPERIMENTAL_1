@@ -247,22 +247,25 @@ body::before {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: 10px;
+  margin: var(--space-xs) 0;
 }
 
 .feature-item {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  transition: transform var(--duration-fast) var(--ease-out-expo);
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
-.hero-footer {
-  position: relative;
-  z-index: 2;
-  margin-top: var(--space-md);
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--border-subtle);
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(56, 189, 248, 0.25);
+  transform: translateX(3px);
 }
 
 /* Iconos de características grandes, notorios y nítidos */
@@ -311,7 +314,7 @@ body::before {
 .hero-footer {
   position: relative;
   z-index: 2;
-  margin-top: auto;
+  margin-top: var(--space-md);
   padding-top: var(--space-sm);
   border-top: 1px solid var(--border-subtle);
 }
@@ -391,7 +394,7 @@ body::before {
 
 /* Cabecera del Formulario con Icono y Título en la Misma Fila Horizontal */
 .panel-header {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .panel-title-row {
@@ -425,9 +428,10 @@ body::before {
 }
 
 .panel-subtitle {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   color: var(--text-muted);
   margin-top: 2px;
+  margin-bottom: 10px;
 }
 
 /* ==========================================================================
@@ -467,12 +471,14 @@ body::before {
   animation: fieldEnterCascade 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.form-view.active .form-grid > *:nth-child(1) { animation-delay: 30ms; }
-.form-view.active .form-grid > *:nth-child(2) { animation-delay: 70ms; }
-.form-view.active .form-grid > *:nth-child(3) { animation-delay: 110ms; }
-.form-view.active .form-grid > *:nth-child(4) { animation-delay: 150ms; }
-.form-view.active .form-grid > *:nth-child(5) { animation-delay: 190ms; }
-.form-view.active .form-grid > *:nth-child(6) { animation-delay: 230ms; }
+.form-view.active .form-grid > *:nth-child(1) { animation-delay: 20ms; }
+.form-view.active .form-grid > *:nth-child(2) { animation-delay: 50ms; }
+.form-view.active .form-grid > *:nth-child(3) { animation-delay: 80ms; }
+.form-view.active .form-grid > *:nth-child(4) { animation-delay: 110ms; }
+.form-view.active .form-grid > *:nth-child(5) { animation-delay: 140ms; }
+.form-view.active .form-grid > *:nth-child(6) { animation-delay: 170ms; }
+.form-view.active .form-grid > *:nth-child(7) { animation-delay: 200ms; }
+.form-view.active .form-grid > *:nth-child(8) { animation-delay: 230ms; }
 
 /* ==========================================================================
    6. Componentes de Entrada y Formulario
@@ -494,6 +500,7 @@ body::before {
   flex-direction: column;
   gap: var(--space-3xs);
   position: relative;
+  margin-top: 2px;
 }
 
 .label-row {
@@ -661,8 +668,8 @@ body::before {
 }
 
 .badge-icon-pill {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   background: rgba(16, 185, 129, 0.1);
   color: var(--color-success);
@@ -679,13 +686,13 @@ body::before {
 }
 
 .badge-copy strong {
-  font-size: var(--font-size-2xs);
+  font-size: var(--font-size-sm);
   color: var(--text-primary);
   font-weight: var(--font-weight-semibold);
 }
 
 .badge-copy span {
-  font-size: var(--font-size-2xs);
+  font-size: var(--font-size-sm);
   color: var(--text-faint);
   line-height: 1.3;
 }
@@ -730,17 +737,17 @@ body::before {
 
 /* Texto de Asistencia Informativo para cada Input (Helper Hints) */
 .field-hint-text {
-  font-size: var(--font-size-2xs);
-  color: var(--text-faint);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin-top: 1px;
+  margin-top: 6px;
   line-height: 1.3;
 }
 
 .field-hint-text i {
-  font-size: 9px;
+  font-size: 13px;
   opacity: 0.85;
   color: var(--color-accent-cyan);
 }
@@ -757,7 +764,7 @@ body::before {
    9. Medidor de Fuerza de Contraseña
    ========================================================================== */
 .password-strength-box {
-  margin-top: var(--space-3xs);
+  margin-top: var(--space-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-2xs);

@@ -116,6 +116,15 @@
                 <span>Control de ciclo de vida en el DOM con 0 ms de latencia HTTP</span>
               </div>
             </li>
+            <li class="feature-item">
+              <span class="feature-icon" aria-hidden="true">
+                <i class="fa-solid fa-key"></i>
+              </span>
+              <div class="feature-text">
+                <strong>Control Criptográfico E2E</strong>
+                <span>Validación perimetral y transporte seguro con cifrado estricto</span>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -504,6 +513,46 @@
                   </div>
 
                   <div id="error-register-password" class="field-error-msg" role="alert">
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                    <span class="error-text"></span>
+                  </div>
+                </div>
+
+                <!-- Campo 6: Confirmación de Contraseña -->
+                <div class="form-group" id="group-register-confirm-password">
+                  <label for="register-confirm-password" class="form-label">
+                    <span>Confirmar Contraseña</span>
+                    <span class="required-indicator" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-icon-slot" aria-hidden="true">
+                      <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <input
+                      type="password"
+                      id="register-confirm-password"
+                      name="confirmPassword"
+                      class="form-input"
+                      placeholder="Repite tu contraseña de acceso"
+                      autocomplete="new-password"
+                      required
+                      aria-required="true"
+                      aria-invalid="false"
+                      aria-describedby="hint-register-confirm-password error-register-confirm-password"
+                    >
+                    <button
+                      type="button"
+                      class="btn-toggle-password"
+                      aria-label="Mostrar u ocultar confirmación de contraseña"
+                      data-target="register-confirm-password"
+                    >
+                      <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <span class="field-hint-text" id="hint-register-confirm-password">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Debe ser idéntica a la contraseña ingresada arriba
+                  </span>
+                  <div id="error-register-confirm-password" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
                     <span class="error-text"></span>
                   </div>
