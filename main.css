@@ -215,9 +215,7 @@ body::before {
   color: var(--text-primary);
   line-height: var(--line-height-snug);
   letter-spacing: -0.03em;
-  margin-bottom: 2px;
-  transition: font-size 420ms cubic-bezier(0.16, 1, 0.3, 1),
-              margin-bottom 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: var(--space-2xs);
 }
 
 .hero-description {
@@ -225,11 +223,9 @@ body::before {
   color: var(--text-muted);
   line-height: var(--line-height-normal);
   margin-bottom: var(--space-xs);
-  transition: margin-bottom 420ms cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Gráfico Ornamental SVG con transición de escala y altura */
+/* Gráfico Ornamental SVG Amplio, Protegido contra Solapamiento */
 .hero-visual-graphic {
   width: 100%;
   margin: var(--space-xs) 0 var(--space-md) 0;
@@ -237,15 +233,13 @@ body::before {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 6px;
-  transition: max-height 420ms cubic-bezier(0.16, 1, 0.3, 1),
-              margin 420ms cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  max-height: 135px;
 }
 
 .network-svg {
   width: 100%;
-  max-height: 140px;
+  max-height: 125px;
   display: block;
 }
 
@@ -253,109 +247,22 @@ body::before {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-  transition: gap 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  gap: var(--space-sm);
 }
 
 .feature-item {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  transition: all 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--duration-fast) var(--ease-out-expo);
 }
 
-/* ==========================================================================
-   Modo Login: Ajuste Compacto y Fluido (Sin Espacios Vacíos)
-   ========================================================================== */
-.auth-card-split.mode-login .auth-hero-panel,
-.auth-card-split.mode-recovery .auth-hero-panel {
-  padding: var(--space-lg) var(--space-lg);
-  gap: var(--space-xs);
-}
-
-.auth-card-split.mode-login .hero-body,
-.auth-card-split.mode-recovery .hero-body {
-  margin: 0;
-}
-
-.auth-card-split.mode-login .hero-headline,
-.auth-card-split.mode-recovery .hero-headline {
-  font-size: 1.15rem;
-  margin-bottom: 2px;
-}
-
-.auth-card-split.mode-login .hero-description,
-.auth-card-split.mode-recovery .hero-description {
-  margin-bottom: 4px;
-}
-
-.auth-card-split.mode-login .hero-visual-graphic,
-.auth-card-split.mode-recovery .hero-visual-graphic {
-  max-height: 85px;
-  margin: 2px 0 8px 0;
-  transform: scale(0.96);
-  opacity: 0.9;
-}
-
-.auth-card-split.mode-login .hero-feature-list,
-.auth-card-split.mode-recovery .hero-feature-list {
-  gap: 8px;
-}
-
-.auth-card-split.mode-login .feature-icon,
-.auth-card-split.mode-recovery .feature-icon {
-  width: 36px;
-  height: 36px;
-  font-size: 1.05rem;
-}
-
-.auth-card-split.mode-login .hero-footer,
-.auth-card-split.mode-recovery .hero-footer {
-  margin-top: auto;
-  padding-top: var(--space-xs);
-}
-
-/* ==========================================================================
-   Modo Registro: Expansión Fluida y Armónica
-   ========================================================================== */
-.auth-card-split.mode-register .auth-hero-panel {
-  padding: var(--space-xl) var(--space-lg);
-  gap: var(--space-sm);
-}
-
-.auth-card-split.mode-register .hero-body {
-  margin: var(--space-xs) 0;
-}
-
-.auth-card-split.mode-register .hero-headline {
-  font-size: var(--font-size-lg);
-  margin-bottom: 2px;
-}
-
-.auth-card-split.mode-register .hero-description {
-  margin-bottom: var(--space-xs);
-}
-
-.auth-card-split.mode-register .hero-visual-graphic {
-  max-height: 140px;
-  margin: var(--space-xs) 0 var(--space-md) 0;
-  transform: scale(1);
-  opacity: 1;
-}
-
-.auth-card-split.mode-register .hero-feature-list {
-  gap: var(--space-md);
-}
-
-.auth-card-split.mode-register .feature-icon {
-  width: 40px;
-  height: 40px;
-  font-size: 1.15rem;
-}
-
-.auth-card-split.mode-register .hero-footer {
-  margin-top: auto;
+.hero-footer {
+  position: relative;
+  z-index: 2;
+  margin-top: var(--space-md);
   padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
 }
 
 /* Iconos de características grandes, notorios y nítidos */
@@ -543,6 +450,29 @@ body::before {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Animación escalonada de aparición suave de campos e inputs */
+@keyframes fieldEnterCascade {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-view.active .form-grid > * {
+  animation: fieldEnterCascade 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.form-view.active .form-grid > *:nth-child(1) { animation-delay: 30ms; }
+.form-view.active .form-grid > *:nth-child(2) { animation-delay: 70ms; }
+.form-view.active .form-grid > *:nth-child(3) { animation-delay: 110ms; }
+.form-view.active .form-grid > *:nth-child(4) { animation-delay: 150ms; }
+.form-view.active .form-grid > *:nth-child(5) { animation-delay: 190ms; }
+.form-view.active .form-grid > *:nth-child(6) { animation-delay: 230ms; }
 
 /* ==========================================================================
    6. Componentes de Entrada y Formulario
