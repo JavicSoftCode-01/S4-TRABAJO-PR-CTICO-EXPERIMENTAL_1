@@ -1,12 +1,5 @@
-/**
- * L2_module_component_tests.test.js
- * Capa 2: Pruebas de Módulos y Componentes Encapsulados
- * Skills Asociadas: software-engineering | frontend-design-engineering
- */
-
 const assert = require('assert');
 
-// Mock del generador del componente Toast
 function createToastComponent(title, message, type = 'error') {
   const allowedTypes = ['success', 'error', 'warning'];
   const finalType = allowedTypes.includes(type) ? type : 'error';
@@ -24,7 +17,6 @@ function createToastComponent(title, message, type = 'error') {
   };
 }
 
-// Mock del componente de Visibilidad de Contraseña (Toggle)
 function togglePasswordState(currentType) {
   if (currentType === 'password') {
     return { newType: 'text', icon: 'fa-eye-slash', ariaLabel: 'Ocultar contraseña' };
@@ -36,7 +28,6 @@ function togglePasswordState(currentType) {
 function runL2Tests() {
   console.log('--- Ejecutando L2: Pruebas de Módulos / Componentes (software-engineering / frontend-design) ---');
 
-  // Test 2.1: Estructura del componente Toast de Error
   const errToast = createToastComponent('Error', 'Campo requerido', 'error');
   assert.strictEqual(errToast.className, 'toast toast-error');
   assert.strictEqual(errToast.role, 'alert');
@@ -44,14 +35,12 @@ function runL2Tests() {
   assert.strictEqual(errToast.hasCloseButton, true);
   console.log('  ✔ Componente Toast Error genera atributos semánticos y role="alert"');
 
-  // Test 2.2: Estructura del componente Toast de Éxito
   const successToast = createToastComponent('Éxito', 'Operación completada', 'success');
   assert.strictEqual(successToast.className, 'toast toast-success');
   assert.strictEqual(successToast.role, 'status');
   assert.strictEqual(successToast.iconClass, 'fa-circle-check');
   console.log('  ✔ Componente Toast Éxito genera role="status" y clase de éxito');
 
-  // Test 2.3: Alternancia de estado en Toggle Password
   const toText = togglePasswordState('password');
   assert.strictEqual(toText.newType, 'text');
   assert.strictEqual(toText.icon, 'fa-eye-slash');

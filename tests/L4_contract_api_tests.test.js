@@ -1,12 +1,5 @@
-/**
- * L4_contract_api_tests.test.js
- * Capa 4: Pruebas de Contratos de Interfaz y Esquemas DTO/API
- * Skills Asociadas: software-engineering | requirements-quality-engineering
- */
-
 const assert = require('assert');
 
-// Validación de esquemas DTO esperados por el contrato del sistema
 function validateRegistrationDTO(payload) {
   const requiredKeys = ['fullname', 'email', 'age', 'phone', 'password'];
   for (const key of requiredKeys) {
@@ -27,7 +20,6 @@ function validateRegistrationDTO(payload) {
 function runL4Tests() {
   console.log('--- Ejecutando L4: Pruebas de Contratos y Esquemas de API (software-eng / requirements) ---');
 
-  // Test 4.1: Contrato completo con los 5 campos mínimos de registro
   const validPayload = {
     fullname: 'Carlos Andrés Mendoza',
     email: 'carlos.mendoza@gmail.com',
@@ -40,7 +32,6 @@ function runL4Tests() {
   assert.strictEqual(resultOk.valid, true, 'El DTO válido debe ser aceptado por el contrato');
   console.log('  ✔ Contrato DTO de Registro acepta los 5 campos requeridos con tipos correctos');
 
-  // Test 4.2: DTO incompleto (ausencia de teléfono)
   const incompletePayload = {
     fullname: 'Carlos Andrés Mendoza',
     email: 'carlos.mendoza@universidad.edu.ec',

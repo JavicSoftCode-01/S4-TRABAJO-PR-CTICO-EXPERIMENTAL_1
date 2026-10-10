@@ -7,31 +7,24 @@
   <meta name="theme-color" content="#090d16">
   <title>NexusAuth Enterprise • Portal de Acceso Seguro</title>
 
-  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome 6.5.1 CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- Hojas de Estilo Modulares -->
   <link rel="stylesheet" href="root.css">
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <!-- Enlace de Salto Accesible (A11y Skip Link) -->
+  
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-  <!-- Layout Principal Split-Screen -->
   <div class="auth-layout-container">
     <main id="main-content" class="auth-card-split mode-login" role="main">
       
-      <!-- ====================================================================
-           PANEL IZQUIERDO: Hero Showcase y Autoridad de Marca (Desktop Showcase)
-           ==================================================================== -->
       <aside class="auth-hero-panel" aria-label="Información institucional y características del sistema">
-        <!-- Aura de Iluminación Ambiental -->
+        
         <div class="ambient-glow" aria-hidden="true"></div>
 
         <div class="hero-header">
@@ -58,7 +51,6 @@
             Arquitectura de validación perimetral con interfaz optimizada de alta densidad y cumplimiento estricto WCAG 2.2 AA.
           </p>
 
-          <!-- Gráfico SVG Ornamental Amplio: Red de Nodos de Seguridad -->
           <div class="hero-visual-graphic" aria-hidden="true">
             <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" class="network-svg">
               <defs>
@@ -87,7 +79,6 @@
             </svg>
           </div>
 
-          <!-- Píldoras de Atributos de Calidad con Iconos Notorios y Grandes -->
           <ul class="hero-feature-list" role="list">
             <li class="feature-item">
               <span class="feature-icon" aria-hidden="true">
@@ -128,12 +119,8 @@
         </div>
       </aside>
 
-      <!-- ====================================================================
-           PANEL DERECHO: Centro de Formularios Dinámicos de Autenticación
-           ==================================================================== -->
       <section class="auth-form-panel" aria-label="Formularios de Autenticación">
         
-        <!-- Barra de Pestañas Segmentadas (Selector Rápido de Vista) -->
         <nav class="segmented-nav-wrapper" role="tablist" aria-label="Cambio de modo de acceso">
           <div class="segmented-track">
             <button
@@ -163,7 +150,6 @@
           </div>
         </nav>
 
-        <!-- Cabecera de la Vista Activa: Icono y Título Alineados Horizontalmente -->
         <header class="panel-header">
           <div class="panel-title-row">
             <div class="header-badge" aria-hidden="true">
@@ -174,17 +160,12 @@
           <p class="panel-subtitle" id="spa-subtitle">Ingresa tus credenciales corporativas para acceder</p>
         </header>
 
-        <!-- Contenedor Viewport de Vistas Dinámicas -->
         <div class="views-viewport">
           
-          <!-- ================================================================
-               1. Vista: Iniciar Sesión
-               ================================================================ -->
           <section id="view-login" class="form-view active" role="tabpanel" aria-labelledby="tab-login">
             <form id="form-login" novalidate>
               <div class="form-grid">
                 
-                <!-- Campo: Correo Electrónico -->
                 <div class="form-group" id="group-login-email">
                   <label for="login-email" class="form-label">
                     <span>Correo Corporativo (@gmail.com)</span>
@@ -216,7 +197,6 @@
                   </div>
                 </div>
 
-                <!-- Campo: Contraseña -->
                 <div class="form-group" id="group-login-password">
                   <div class="label-row">
                     <label for="login-password" class="form-label">
@@ -266,7 +246,6 @@
                   </div>
                 </div>
 
-                <!-- Control Adicional: Recordar Equipo -->
                 <div class="login-meta-row">
                   <label class="remember-checkbox-label" for="login-remember">
                     <input type="checkbox" id="login-remember" class="custom-checkbox">
@@ -277,7 +256,6 @@
                   </label>
                 </div>
 
-                <!-- Botón Principal de Envío -->
                 <div class="form-actions">
                   <button type="submit" class="btn btn-primary" id="btn-submit-login">
                     <span>Acceder al Portal</span>
@@ -285,7 +263,6 @@
                   </button>
                 </div>
 
-                <!-- Micro-Badge de Seguridad Corporativa -->
                 <div class="auth-security-badge-compact" aria-hidden="true">
                   <div class="badge-icon-pill">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -311,19 +288,15 @@
             </form>
           </section>
 
-          <!-- ================================================================
-               2. Vista: Registro de Usuario (Mínimo 5 Campos Requeridos)
-               ================================================================ -->
           <section id="view-register" class="form-view" role="tabpanel" aria-labelledby="tab-register">
             <form id="form-register" novalidate>
               <div class="form-grid">
 
-                <!-- Sección 1: Datos Personales -->
                 <fieldset class="form-section">
                 <legend class="form-section-title"><span class="form-section-index">01</span> Identidad y contacto</legend>
 
                 <div class="form-row-2col">
-                <!-- Campo 1: Nombres y Apellidos Completos -->
+                
                 <div class="form-group" id="group-register-name">
                   <label for="register-name" class="form-label">
                     <span>Nombres Completos</span>
@@ -355,7 +328,6 @@
                   </div>
                 </div>
 
-                <!-- Campo 2: Correo Electrónico -->
                 <div class="form-group" id="group-register-email">
                   <label for="register-email" class="form-label">
                     <span>Correo Electrónico (@gmail.com)</span>
@@ -388,9 +360,8 @@
                 </div>
                 </div>
 
-                <!-- Fila Doble Columna: Edad y Teléfono -->
                 <div class="form-row-2col">
-                  <!-- Campo 3: Edad -->
+                  
                   <div class="form-group" id="group-register-age">
                     <label for="register-age" class="form-label">
                       <span>Edad</span>
@@ -423,7 +394,6 @@
                     </div>
                   </div>
 
-                  <!-- Campo 4: Teléfono -->
                   <div class="form-group" id="group-register-phone">
                     <label for="register-phone" class="form-label">
                       <span>Teléfono (+593)</span>
@@ -460,13 +430,11 @@
                 </div>
                 </fieldset>
 
-                <!-- Sección 2: Seguridad de la Cuenta -->
                 <fieldset class="form-section">
                 <legend class="form-section-title"><span class="form-section-index">02</span> Seguridad de la cuenta</legend>
 
-                <!-- Fila 2 Columnas: Contraseña y Confirmación -->
                 <div class="form-row-2col">
-                  <!-- Campo 5: Contraseña -->
+                  
                   <div class="form-group" id="group-register-password">
                     <label for="register-password" class="form-label">
                       <span>Contraseña Segura</span>
@@ -506,7 +474,6 @@
                     </div>
                   </div>
 
-                  <!-- Campo 6: Confirmación de Contraseña -->
                   <div class="form-group" id="group-register-confirm-password">
                     <label for="register-confirm-password" class="form-label">
                       <span>Confirmar Contraseña</span>
@@ -547,7 +514,6 @@
                   </div>
                 </div>
 
-                <!-- Medidor de Fortaleza Dinámico (UX Premium Compacto) -->
                 <div class="password-strength-box" id="password-strength-box" aria-live="polite">
                   <div class="strength-meter-bar">
                     <div class="strength-progress" id="strength-progress"></div>
@@ -566,7 +532,6 @@
                 </div>
                 </fieldset>
 
-                <!-- Botón de Envío -->
                 <div class="form-actions">
                   <button type="submit" class="btn btn-primary" id="btn-submit-register">
                     <span>Crear Cuenta Corporativa</span>
@@ -589,9 +554,6 @@
             </form>
           </section>
 
-          <!-- ================================================================
-               3. Vista: Recuperación de Contraseña
-               ================================================================ -->
           <section id="view-recovery" class="form-view" role="tabpanel" aria-labelledby="spa-title">
             <form id="form-recovery" novalidate>
               <div class="form-grid">
@@ -603,7 +565,6 @@
                   </p>
                 </div>
 
-                <!-- Campo: Correo Electrónico para Recuperación -->
                 <div class="form-group" id="group-recovery-email">
                   <label for="recovery-email" class="form-label">
                     <span>Correo Institucional (@gmail.com)</span>
@@ -635,7 +596,6 @@
                   </div>
                 </div>
 
-                <!-- Botón de Envío -->
                 <div class="form-actions">
                   <button type="submit" class="btn btn-primary" id="btn-submit-recovery">
                     <span>Emitir Instrucciones de Recuperación</span>
@@ -663,7 +623,6 @@
     </main>
   </div>
 
-  <!-- Región Accesible para Notificaciones Flotantes (Toasts Estilo Sonner/Clerk) -->
   <aside
     id="toast-container"
     class="toast-container"
@@ -672,7 +631,6 @@
     aria-label="Notificaciones del sistema"
   ></aside>
 
-  <!-- Lógica de Negocio y Control Front-End -->
   <script src="script.js"></script>
 </body>
 </html>

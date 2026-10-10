@@ -1,9 +1,3 @@
-/**
- * L6_performance_stress_tests.test.js
- * Capa 6: Pruebas de Rendimiento, Estrés y Benchmarks No Funcionales
- * Skills Asociadas: architecture-engineering | database-engineering (optimización de recursos)
- */
-
 const assert = require('assert');
 
 const escapeHTML = (str) => {
@@ -24,7 +18,6 @@ function runL6Tests() {
 
   const iterations = 50000;
 
-  // Test 6.1: Benchmark de escapeHTML bajo estrés
   const startEscape = performance.now();
   for (let i = 0; i < iterations; i++) {
     escapeHTML('<div class="test" onclick="alert(1)">Hola & Adiós</div>');
@@ -34,7 +27,6 @@ function runL6Tests() {
   console.log(`  ✔ escapeHTML ejecutó ${iterations} llamadas en ${escapeDuration.toFixed(2)} ms (${(escapeDuration / iterations * 1000).toFixed(4)} µs/op)`);
   assert.ok(escapeDuration < 500, 'El escape XSS debe procesar 50k iteraciones en menos de 500ms');
 
-  // Test 6.2: Benchmark de Regex de Correo Electrónico (@gmail.com)
   const testEmails = [
     'usuario.valido@gmail.com',
     'correo_invalido_sin_arroba',

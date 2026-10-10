@@ -1,27 +1,7 @@
-/**
- * script.js - Lógica de Negocio, Controlador SPA, Validaciones Defensivas y UX Amigable
- * 
- * NOTA DE SEGURIDAD ARQUITECTÓNICA:
- * Todas las validaciones ejecutadas en este script son exclusivamente del lado del CLIENTE (Front-End)
- * para optimizar la experiencia de usuario (UX) y brindar retroalimentación visual inmediata.
- * En un entorno de producción profesional, ninguna validación de cliente reemplaza la seguridad del servidor;
- * la verificación de credenciales, unicidad de correos, existencia de usuarios y persistencia de datos
- * DEBE ser obligatoriamente validada y autorizada en el Back-End.
- */
-
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ==========================================================================
-     1. Módulo de Seguridad: Sanitización y Mitigación XSS (Cross-Site Scripting)
-     ========================================================================== */
-  /**
-   * Convierte caracteres especiales en entidades HTML seguras para prevenir
-   * inyecciones de código malicioso cuando se reflejan datos en el DOM.
-   * @param {string} str - Cadena de entrada sin procesar
-   * @returns {string} Cadena sanitizada
-   */
   const escapeHTML = (str) => {
     if (typeof str !== 'string') return '';
     return str
@@ -33,18 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/\//g, '&#2F;');
   };
 
-  /* ==========================================================================
-     2. Módulo de Notificaciones: Custom Toasts (Estilo Sonner / Clerk)
-     ========================================================================== */
   const toastContainer = document.getElementById('toast-container');
 
-  /**
-   * Genera e inyecta dinámicamente una alerta flotante accesible en el DOM.
-   * @param {string} title - Título del mensaje
-   * @param {string} message - Cuerpo descriptivo del mensaje
-   * @param {'success'|'error'|'warning'} type - Tipo semántico
-   * @param {number} duration - Duración en milisegundos (default: 4000ms)
-   */
   const showToast = (title, message, type = 'error', duration = 4000) => {
     if (!toastContainer) return;
 
@@ -73,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    // Cierre manual mediante botón
     const closeBtn = toast.querySelector('.toast-close-btn');
     const dismissToast = () => {
       toast.classList.add('toast-closing');
@@ -84,12 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeBtn.addEventListener('click', dismissToast);
 
-    // Auto-cierre con temporizador
     const autoDismissTimer = setTimeout(() => {
       dismissToast();
     }, duration);
 
-    // Pausar auto-cierre si el usuario inspecciona el toast con el cursor
     toast.addEventListener('mouseenter', () => clearTimeout(autoDismissTimer));
     toast.addEventListener('mouseleave', () => {
       setTimeout(dismissToast, 1500);
@@ -98,9 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     toastContainer.appendChild(toast);
   };
 
-  /* ==========================================================================
-     3. Módulo SPA: Enrutamiento Visual y Gestión de Segmented Tabs
-     ========================================================================== */
   const spaTitle = document.getElementById('spa-title');
   const spaSubtitle = document.getElementById('spa-subtitle');
   const brandIcon = document.getElementById('brand-icon');
@@ -108,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabLogin = document.getElementById('tab-login');
   const tabRegister = document.getElementById('tab-register');
 
-  // Registro de estado de envío para evitar validaciones prematuras en blur
   const formSubmitTracker = {
     'form-login': false,
     'form-register': false,
@@ -151,9 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     '#recovery': 'view-recovery'
   };
 
-  /**
-   * Limpia totalmente los estados de error y validación de todos los campos.
-   */
   const clearAllValidationStates = () => {
     document.querySelectorAll('.form-group').forEach(group => {
       group.classList.remove('has-error', 'is-valid');
@@ -166,28 +126,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  /**
-   * Alterna de manera fluida entre las vistas de la SPA sin recargar la página
-   * y sincroniza la URL dinámica en la barra de direcciones del navegador.
-   * @param {string} targetViewId - Identificador del contenedor de vista destino
-   * @param {boolean} updateHistory - Determina si se actualiza el historial/hash
-   */
   const switchView = (targetViewId, updateHistory = true) => {
     const targetView = document.getElementById(targetViewId);
     if (!targetView || !viewMetadata[targetViewId]) return;
 
-    // Limpiar estados de error al alternar entre pestañas para una experiencia impecable
     clearAllValidationStates();
 
-    // Desactivar vista actual
     views.forEach(view => {
       view.classList.remove('active');
     });
 
-    // Activar vista seleccionada
     targetView.classList.add('active');
 
-    // Sincronizar clase de modo de layout para animación fluida de ajuste en el panel izquierdo
     const authCardSplit = document.querySelector('.auth-card-split');
     if (authCardSplit) {
       authCardSplit.classList.remove('mode-login', 'mode-register', 'mode-recovery');
@@ -200,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Sincronizar pestañas segmentadas
     const meta = viewMetadata[targetViewId];
     if (tabLogin && tabRegister) {
       if (meta.activeTab === 'tab-login') {
@@ -221,14 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Actualizar encabezados contextuales
     if (spaTitle) spaTitle.textContent = meta.title;
     if (spaSubtitle) spaSubtitle.textContent = meta.subtitle;
     if (brandIcon) {
       brandIcon.className = meta.iconClass;
     }
 
-    // Sincronización de URL dinámica
     if (updateHistory && meta.route) {
       if (window.location.hash !== meta.route) {
         history.pushState({ view: targetViewId }, '', meta.route);
@@ -236,10 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  /**
-   * Controlador de enrutamiento dinámico SPA por Hash y History API.
-   * Permite navegación directa por URL y respuesta a botones Atrás / Adelante del navegador.
-   */
   const handleRouting = () => {
     const rawHash = (window.location.hash || '').toLowerCase();
     const targetViewId = routeToViewId[rawHash] || 'view-login';
@@ -253,10 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('hashchange', handleRouting);
   window.addEventListener('popstate', handleRouting);
 
-  // Inicializar vista activa desde la URL actual
   handleRouting();
 
-  // Delegación de eventos para elementos con atributo data-navigate
   document.querySelectorAll('[data-navigate]').forEach(button => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -265,9 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ==========================================================================
-     4. Módulo de Visibilidad de Contraseñas (Toggle Password)
-     ========================================================================= */
   document.querySelectorAll('.btn-toggle-password').forEach(toggleBtn => {
     toggleBtn.addEventListener('click', () => {
       const targetInputId = toggleBtn.getAttribute('data-target');
@@ -295,9 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ==========================================================================
-     5. Módulo de Fuerza de Contraseña Interactivo (Live UX Strength Meter)
-     ========================================================================== */
   const registerPasswordInput = document.getElementById('register-password');
   const strengthProgress = document.getElementById('strength-progress');
   const ruleLength = document.getElementById('rule-length');
@@ -328,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
         strengthProgress.classList.add('strong');
       }
 
-      // Revalidar confirmación si el usuario ya escribió en ella
       const confirmInput = document.getElementById('register-confirm-password');
       if (confirmInput && confirmInput.value.trim().length > 0) {
         const confirmResult = validateField(confirmInput);
@@ -337,9 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ==========================================================================
-     6. Módulo de Validaciones Rigurosas (Reglas de Negocio Client-Side)
-     ========================================================================== */
   const validationRules = {
     isValidEmail: (email) => {
       const trimmed = (email || '').trim();
@@ -449,11 +380,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return { isValid: true, error: '' };
   };
 
-  // Restricción en tiempo real para campo de teléfono: solo números, prefijo +593 y máx 13 caracteres
   const phoneInputs = document.querySelectorAll('input[type="tel"], input[name="phone"]');
   phoneInputs.forEach(phoneInput => {
     phoneInput.addEventListener('keydown', (e) => {
-      // Teclas funcionales y comandos
+      
       if (
         ['Backspace', 'Tab', 'Enter', 'Delete', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key) ||
         (e.ctrlKey || e.metaKey)
@@ -461,7 +391,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Permitir '+' únicamente en la primera posición si no existe ya
       if (e.key === '+') {
         if ((phoneInput.value.length === 0 || phoneInput.selectionStart === 0) && !phoneInput.value.includes('+')) {
           return;
@@ -470,7 +399,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Permitir dígitos 0-9 verificando que no exceda 13 caracteres (+593 + 9 dígitos)
       if (/^[0-9]$/.test(e.key)) {
         if (phoneInput.value.length >= 13 && phoneInput.selectionStart === phoneInput.selectionEnd) {
           e.preventDefault();
@@ -478,7 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Bloquear letras y otros caracteres alfanuméricos/especiales
       e.preventDefault();
     });
 
@@ -496,7 +423,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Enlazar eventos blur e input con comportamiento UX NO intrusivo
   const inputs = document.querySelectorAll('.form-input');
   inputs.forEach(input => {
     input.addEventListener('blur', () => {
@@ -505,9 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const hasBeenSubmitted = formSubmitTracker[formId];
       const trimmedVal = input.value.trim();
 
-      // REGLA CLAVE DE UX:
-      // Si el campo está vacío y el usuario NO ha intentado enviar el formulario aún,
-      // NO mostrar error ni borde rojo. Mantener el campo limpio.
       if (trimmedVal === '') {
         if (!hasBeenSubmitted) {
           clearFieldValidationState(input);
@@ -515,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Si el usuario escribió contenido (aunque no haya hecho submit), o si ya intentó hacer submit:
       const result = validateField(input);
       setFieldValidationState(input, result.isValid, result.error);
     });
@@ -531,11 +453,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ==========================================================================
-     7. Controladores de Eventos Submit (Intercepción y Prevención por Defecto)
-     ========================================================================== */
-
-  // Formulario 1: Inicio de Sesión
   const formLogin = document.getElementById('form-login');
   if (formLogin) {
     formLogin.addEventListener('submit', (e) => {
@@ -566,7 +483,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Formulario 2: Registro de Usuario (Mínimo 5 campos)
   const formRegister = document.getElementById('form-register');
   if (formRegister) {
     formRegister.addEventListener('submit', (e) => {
@@ -626,7 +542,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Formulario 3: Recuperación de Contraseña
   const formRecovery = document.getElementById('form-recovery');
   if (formRecovery) {
     formRecovery.addEventListener('submit', (e) => {

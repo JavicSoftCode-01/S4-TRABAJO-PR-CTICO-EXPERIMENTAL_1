@@ -1,8 +1,3 @@
-/**
- * run_all.js
- * Ejecutor integral de la Suite de 7 Capas de Pruebas de Software
- */
-
 const runL1 = require('./L1_unit_tests.test.js');
 const runL2 = require('./L2_module_component_tests.test.js');
 const runL3 = require('./L3_integration_tests.test.js');

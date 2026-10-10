@@ -1,12 +1,5 @@
-/**
- * L3_integration_tests.test.js
- * Capa 3: Pruebas de Integración (Interacción entre Lógica, Eventos y Estado)
- * Skills Asociadas: software-engineering | database-engineering (interacción de límites)
- */
-
 const assert = require('assert');
 
-// Mock del pipeline de recepción de formulario con preventDefault y validación
 function handleFormSubmitPipeline(formData, rulesValidator) {
   let defaultPrevented = false;
   const mockEvent = {
@@ -46,7 +39,6 @@ function runL3Tests() {
     phone: (val) => typeof val === 'string' && /^\+593[0-9]{9}$/.test(val.trim())
   };
 
-  // Test 3.1: Formulario con error previene recarga y genera mapa de errores
   const invalidData = {
     email: 'invalido@otrodominio.com',
     password: '123',
@@ -60,7 +52,6 @@ function runL3Tests() {
   assert.strictEqual(Object.keys(invalidResult.errors).length, 4, 'Debe registrar 4 errores');
   console.log('  ✔ Pipeline previene submit nativo y colecta fallos de validación');
 
-  // Test 3.2: Formulario válido previene recarga y pasa con éxito
   const validData = {
     email: 'contacto.empresa@gmail.com',
     password: 'PasswordSegura2026',
