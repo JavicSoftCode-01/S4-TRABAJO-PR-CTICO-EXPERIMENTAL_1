@@ -16,9 +16,9 @@ function validateRegistrationDTO(payload) {
   }
 
   if (typeof payload.fullname !== 'string' || payload.fullname.length < 3) return { valid: false, field: 'fullname' };
-  if (typeof payload.email !== 'string' || !payload.email.includes('@')) return { valid: false, field: 'email' };
-  if (typeof payload.age !== 'number' || payload.age < 14 || payload.age > 120) return { valid: false, field: 'age' };
-  if (typeof payload.phone !== 'string' || payload.phone.length < 8) return { valid: false, field: 'phone' };
+  if (typeof payload.email !== 'string' || !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@gmail\.com$/i.test(payload.email)) return { valid: false, field: 'email' };
+  if (typeof payload.age !== 'number' || payload.age < 18 || payload.age > 75) return { valid: false, field: 'age' };
+  if (typeof payload.phone !== 'string' || !/^\+593[0-9]{9}$/.test(payload.phone)) return { valid: false, field: 'phone' };
   if (typeof payload.password !== 'string' || payload.password.length < 8) return { valid: false, field: 'password' };
 
   return { valid: true };
@@ -30,9 +30,9 @@ function runL4Tests() {
   // Test 4.1: Contrato completo con los 5 campos mínimos de registro
   const validPayload = {
     fullname: 'Carlos Andrés Mendoza',
-    email: 'carlos.mendoza@universidad.edu.ec',
+    email: 'carlos.mendoza@gmail.com',
     age: 22,
-    phone: '0987654321',
+    phone: '+593987654321',
     password: 'PasswordRobusta2026'
   };
 

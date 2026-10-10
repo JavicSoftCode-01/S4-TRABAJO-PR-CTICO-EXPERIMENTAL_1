@@ -17,7 +17,7 @@ const escapeHTML = (str) => {
     .replace(/\//g, '&#2F;');
 };
 
-const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@gmail\.com$/i;
 
 function runL6Tests() {
   console.log('--- Ejecutando L6: Pruebas de Rendimiento y Estrés (architecture / performance) ---');
@@ -34,11 +34,11 @@ function runL6Tests() {
   console.log(`  ✔ escapeHTML ejecutó ${iterations} llamadas en ${escapeDuration.toFixed(2)} ms (${(escapeDuration / iterations * 1000).toFixed(4)} µs/op)`);
   assert.ok(escapeDuration < 500, 'El escape XSS debe procesar 50k iteraciones en menos de 500ms');
 
-  // Test 6.2: Benchmark de Regex de Correo Electrónico
+  // Test 6.2: Benchmark de Regex de Correo Electrónico (@gmail.com)
   const testEmails = [
-    'usuario.valido@empresa.com.ec',
+    'usuario.valido@gmail.com',
     'correo_invalido_sin_arroba',
-    'otro.mas+alias@dominio-complejo.org'
+    'otro.mas+alias@gmail.com'
   ];
 
   const startRegex = performance.now();

@@ -187,7 +187,7 @@
                 <!-- Campo: Correo Electrónico -->
                 <div class="form-group" id="group-login-email">
                   <label for="login-email" class="form-label">
-                    <span>Correo Corporativo</span>
+                    <span>Correo Corporativo (@gmail.com)</span>
                     <span class="required-indicator" aria-hidden="true">*</span>
                   </label>
                   <div class="input-wrapper">
@@ -199,7 +199,7 @@
                       id="login-email"
                       name="email"
                       class="form-input"
-                      placeholder="nombre@organizacion.com"
+                      placeholder="usuario@gmail.com"
                       autocomplete="email"
                       required
                       aria-required="true"
@@ -208,7 +208,7 @@
                     >
                   </div>
                   <span class="field-hint-text" id="hint-login-email">
-                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Formato requerido: usuario@dominio.com
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Dominio requerido: usuario@gmail.com
                   </span>
                   <div id="error-login-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -358,7 +358,7 @@
                 <!-- Campo 2: Correo Electrónico -->
                 <div class="form-group" id="group-register-email">
                   <label for="register-email" class="form-label">
-                    <span>Correo Electrónico</span>
+                    <span>Correo Electrónico (@gmail.com)</span>
                     <span class="required-indicator" aria-hidden="true">*</span>
                   </label>
                   <div class="input-wrapper">
@@ -370,7 +370,7 @@
                       id="register-email"
                       name="email"
                       class="form-input"
-                      placeholder="juan.perez@empresa.com"
+                      placeholder="nombre.apellido@gmail.com"
                       autocomplete="email"
                       required
                       aria-required="true"
@@ -379,7 +379,7 @@
                     >
                   </div>
                   <span class="field-hint-text" id="hint-register-email">
-                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Será tu usuario de acceso
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Debe ser una cuenta válida @gmail.com
                   </span>
                   <div id="error-register-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -406,8 +406,8 @@
                         name="age"
                         class="form-input"
                         placeholder="25"
-                        min="14"
-                        max="120"
+                        min="18"
+                        max="75"
                         required
                         aria-required="true"
                         aria-invalid="false"
@@ -415,7 +415,7 @@
                       >
                     </div>
                     <span class="field-hint-text" id="hint-register-age">
-                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Entre 14 y 120 años
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Entre 18 y 75 años
                     </span>
                     <div id="error-register-age" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -426,7 +426,7 @@
                   <!-- Campo 4: Teléfono -->
                   <div class="form-group" id="group-register-phone">
                     <label for="register-phone" class="form-label">
-                      <span>Teléfono</span>
+                      <span>Teléfono (+593)</span>
                       <span class="required-indicator" aria-hidden="true">*</span>
                     </label>
                     <div class="input-wrapper">
@@ -438,8 +438,11 @@
                         id="register-phone"
                         name="phone"
                         class="form-input"
-                        placeholder="+593 991234567"
+                        placeholder="+593991234567"
                         autocomplete="tel"
+                        maxlength="13"
+                        pattern="^\+593[0-9]{9}$"
+                        inputmode="tel"
                         required
                         aria-required="true"
                         aria-invalid="false"
@@ -447,7 +450,7 @@
                       >
                     </div>
                     <span class="field-hint-text" id="hint-register-phone">
-                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> 8 a 15 dígitos, prefijo opcional
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Formato: +593 seguido de 9 dígitos
                     </span>
                     <div id="error-register-phone" class="field-error-msg" role="alert">
                       <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -603,7 +606,7 @@
                 <!-- Campo: Correo Electrónico para Recuperación -->
                 <div class="form-group" id="group-recovery-email">
                   <label for="recovery-email" class="form-label">
-                    <span>Correo Institucional de Recuperación</span>
+                    <span>Correo Institucional (@gmail.com)</span>
                     <span class="required-indicator" aria-hidden="true">*</span>
                   </label>
                   <div class="input-wrapper">
@@ -615,7 +618,7 @@
                       id="recovery-email"
                       name="email"
                       class="form-input"
-                      placeholder="tu-correo@empresa.com"
+                      placeholder="tu-correo@gmail.com"
                       autocomplete="email"
                       required
                       aria-required="true"
@@ -624,7 +627,7 @@
                     >
                   </div>
                   <span class="field-hint-text" id="hint-recovery-email">
-                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Correo vinculado donde recibirás el enlace temporal
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Correo @gmail.com vinculado donde recibirás el enlace temporal
                   </span>
                   <div id="error-recovery-email" class="field-error-msg" role="alert">
                     <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>

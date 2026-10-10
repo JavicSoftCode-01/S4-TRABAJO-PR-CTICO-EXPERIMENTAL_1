@@ -45,7 +45,9 @@ function runL7Tests() {
     assert.ok(htmlContent.includes(`type="${type}"`), `Input #${id} debe ser de tipo ${type}`);
     assert.ok(htmlContent.includes(`for="${id}"`), `Falta <label for="${id}"> para accesibilidad`);
   });
-  console.log('  ✔ Formulario de Registro cuenta con los campos exigidos y etiquetas <label for> estrictas');
+  assert.ok(htmlContent.includes('id="register-age"') && htmlContent.includes('min="18"') && htmlContent.includes('max="75"'), 'Faltan restricciones min 18 max 75 en edad');
+  assert.ok(htmlContent.includes('id="register-phone"') && htmlContent.includes('maxlength="13"'), 'Falta maxlength="13" en teléfono');
+  console.log('  ✔ Formulario de Registro cuenta con los campos exigidos, límites numéricos [18, 75] y restricciones de longitud estrictas');
 
   // Test 7.5: Enlace de hojas de estilo modulares (root.css y main.css)
   assert.ok(htmlContent.includes('href="root.css"'), 'Falta enlace a root.css');

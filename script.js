@@ -121,22 +121,34 @@ document.addEventListener('DOMContentLoaded', () => {
       subtitle: 'Ingresa tus credenciales corporativas para acceder',
       iconClass: 'fa-solid fa-shield-halved',
       formId: 'form-login',
-      activeTab: 'tab-login'
+      activeTab: 'tab-login',
+      route: '#/login'
     },
     'view-register': {
       title: 'Crear Cuenta Corporativa',
       subtitle: 'Completa los campos requeridos para registrarte',
       iconClass: 'fa-solid fa-user-plus',
       formId: 'form-register',
-      activeTab: 'tab-register'
+      activeTab: 'tab-register',
+      route: '#/register'
     },
     'view-recovery': {
       title: 'Recuperar Contraseña',
-      subtitle: 'Ingresa tu correo institucional para recibir el token de acceso',
+      subtitle: 'Ingresa tu correo @gmail.com para recibir el token de acceso',
       iconClass: 'fa-solid fa-key',
       formId: 'form-recovery',
-      activeTab: null
+      activeTab: null,
+      route: '#/recovery'
     }
+  };
+
+  const routeToViewId = {
+    '#/login': 'view-login',
+    '#/register': 'view-register',
+    '#/recovery': 'view-recovery',
+    '#login': 'view-login',
+    '#register': 'view-register',
+    '#recovery': 'view-recovery'
   };
 
   /**
@@ -156,10 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * Alterna de manera fluida entre las vistas de la SPA sin recargar la página
-   * y sin autofocus prematuro que atrape el cursor del usuario.
+   * y sincroniza la URL dinámica en la barra de direcciones del navegador.
    * @param {string} targetViewId - Identificador del contenedor de vista destino
+   * @param {boolean} updateHistory - Determina si se actualiza el historial/hash
    */
-  const switchView = (targetViewId) => {
+  const switchView = (targetViewId, updateHistory = true) => {
     const targetView = document.getElementById(targetViewId);
     if (!targetView || !viewMetadata[targetViewId]) return;
 
@@ -214,14 +227,41 @@ document.addEventListener('DOMContentLoaded', () => {
     if (brandIcon) {
       brandIcon.className = meta.iconClass;
     }
+
+    // Sincronización de URL dinámica
+    if (updateHistory && meta.route) {
+      if (window.location.hash !== meta.route) {
+        history.pushState({ view: targetViewId }, '', meta.route);
+      }
+    }
   };
+
+  /**
+   * Controlador de enrutamiento dinámico SPA por Hash y History API.
+   * Permite navegación directa por URL y respuesta a botones Atrás / Adelante del navegador.
+   */
+  const handleRouting = () => {
+    const rawHash = (window.location.hash || '').toLowerCase();
+    const targetViewId = routeToViewId[rawHash] || 'view-login';
+    switchView(targetViewId, false);
+    const canonicalRoute = viewMetadata[targetViewId].route;
+    if (window.location.hash !== canonicalRoute) {
+      history.replaceState({ view: targetViewId }, '', canonicalRoute);
+    }
+  };
+
+  window.addEventListener('hashchange', handleRouting);
+  window.addEventListener('popstate', handleRouting);
+
+  // Inicializar vista activa desde la URL actual
+  handleRouting();
 
   // Delegación de eventos para elementos con atributo data-navigate
   document.querySelectorAll('[data-navigate]').forEach(button => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = button.getAttribute('data-navigate');
-      switchView(targetId);
+      switchView(targetId, true);
     });
   });
 
@@ -302,25 +342,27 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const validationRules = {
     isValidEmail: (email) => {
-      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-      return emailRegex.test(email.trim());
+      const trimmed = (email || '').trim();
+      const gmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@gmail\.com$/i;
+      return gmailRegex.test(trimmed);
     },
     isValidPassword: (password) => {
-      if (password.length < 8) return false;
+      if (!password || password.length < 8) return false;
       const hasLetter = /[a-zA-Z]/.test(password);
       const hasNumber = /[0-9]/.test(password);
       return hasLetter && hasNumber;
     },
     isValidAge: (age) => {
       const num = parseInt(age, 10);
-      return !isNaN(num) && num >= 14 && num <= 120;
+      return !isNaN(num) && num >= 18 && num <= 75;
     },
     isValidPhone: (phone) => {
-      const phoneRegex = /^\+?[0-9]{8,15}$/;
-      return phoneRegex.test(phone.replace(/[\s-]/g, ''));
+      const cleaned = (phone || '').trim().replace(/\s+/g, '');
+      const phoneRegex = /^\+593[0-9]{9}$/;
+      return phoneRegex.test(cleaned);
     },
     isValidName: (name) => {
-      const trimmed = name.trim();
+      const trimmed = (name || '').trim();
       return trimmed.length >= 3 && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(trimmed);
     }
   };
@@ -369,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (name === 'email') {
       if (!validationRules.isValidEmail(value)) {
-        return { isValid: false, error: 'Formato de correo no válido (ej: usuario@empresa.com)' };
+        return { isValid: false, error: 'Formato no válido. Debe pertenecer al dominio @gmail.com (ej: usuario@gmail.com)' };
       }
     }
 
@@ -387,13 +429,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (name === 'age') {
       if (!validationRules.isValidAge(value)) {
-        return { isValid: false, error: 'La edad debe estar comprendida entre 14 y 120 años' };
+        return { isValid: false, error: 'La edad debe estar comprendida entre 18 y 75 años' };
       }
     }
 
     if (name === 'phone') {
       if (!validationRules.isValidPhone(value)) {
-        return { isValid: false, error: 'Número telefónico no válido (entre 8 y 15 dígitos)' };
+        return { isValid: false, error: 'Debe iniciar con +593 seguido de exactamente 9 dígitos numéricos (ej: +593991234567)' };
       }
     }
 
@@ -406,6 +448,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return { isValid: true, error: '' };
   };
+
+  // Restricción en tiempo real para campo de teléfono: solo números, prefijo +593 y máx 13 caracteres
+  const phoneInputs = document.querySelectorAll('input[type="tel"], input[name="phone"]');
+  phoneInputs.forEach(phoneInput => {
+    phoneInput.addEventListener('keydown', (e) => {
+      // Teclas funcionales y comandos
+      if (
+        ['Backspace', 'Tab', 'Enter', 'Delete', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key) ||
+        (e.ctrlKey || e.metaKey)
+      ) {
+        return;
+      }
+
+      // Permitir '+' únicamente en la primera posición si no existe ya
+      if (e.key === '+') {
+        if ((phoneInput.value.length === 0 || phoneInput.selectionStart === 0) && !phoneInput.value.includes('+')) {
+          return;
+        }
+        e.preventDefault();
+        return;
+      }
+
+      // Permitir dígitos 0-9 verificando que no exceda 13 caracteres (+593 + 9 dígitos)
+      if (/^[0-9]$/.test(e.key)) {
+        if (phoneInput.value.length >= 13 && phoneInput.selectionStart === phoneInput.selectionEnd) {
+          e.preventDefault();
+        }
+        return;
+      }
+
+      // Bloquear letras y otros caracteres alfanuméricos/especiales
+      e.preventDefault();
+    });
+
+    phoneInput.addEventListener('input', () => {
+      const raw = phoneInput.value;
+      const hasPlus = raw.startsWith('+');
+      const digitsOnly = raw.replace(/\D/g, '');
+      let sanitized = (hasPlus ? '+' : '') + digitsOnly;
+      if (sanitized.length > 13) {
+        sanitized = sanitized.slice(0, 13);
+      }
+      if (phoneInput.value !== sanitized) {
+        phoneInput.value = sanitized;
+      }
+    });
+  });
 
   // Enlazar eventos blur e input con comportamiento UX NO intrusivo
   const inputs = document.querySelectorAll('.form-input');
